@@ -104,16 +104,16 @@ async def validate_vat(payload: ValidateRequest):
         address=(str(result["address"]).strip() or None),
     )
 
-VAT_RATES: Dict[str, Dict[str, Any]] = {
-    "DE": {"standard_rate": 19.0, "reduced_rates": [{"rate": 7.0, "label": "reduced"}], "currency": "EUR"},
-    "FR": {"standard_rate": 20.0, "reduced_rates": [{"rate": 10.0, "label": "reduced"}, {"rate": 5.5, "label": "reduced2"}], "currency": "EUR"},
-    # … weitere Länder
-}
 
 @app.get("/rates/{country}")
 def get_rates(country: str):
-    key = country.upper()
-    data = VAT_RATES.get(key)
-    if not data:
-        raise HTTPException(status_code=404, detail=f"Unknown country: {key}")
-    return {"country": key, **data, "source": "EU/VATify"}
+    country = country.upper()
+
+    if country not in EU_COUNTRY_CODES:
+        raise HTTPException(status_code=400, detail=f"Invalid country code: {country}")
+
+    with open(f"scripts/data/{country}.json", "r", encoding="utf-8") as f:
+        import json
+        data = json.load(f)
+
+    return {"country": country, **data, "source": "EU/VATify"}
