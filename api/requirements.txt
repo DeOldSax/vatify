@@ -1,0 +1,7 @@
+fastapi==0.112.2
+uvicorn[standard]==0.30.6
+zeep==4.2.1
+pytest
+httpx
+lxml
+bs4
