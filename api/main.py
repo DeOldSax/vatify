@@ -1,6 +1,7 @@
+import asyncio
 from datetime import date
 import re
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Literal, Optional
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -15,6 +16,7 @@ from zeep.exceptions import Fault, TransportError
 from datetime import date, datetime, timezone
 import logging
 
+from calculate import CalcRequest, CalcResult, Party
 from validate_vat import ValidateRequest, ValidateResponse, normalize_inputs
 
 logger = logging.getLogger("vatify")
@@ -117,3 +119,107 @@ def get_rates(country: str):
         data = json.load(f)
 
     return {"country": country, **data, "source": "EU/VATify"}
+
+
+def get_rate(country_code: str, rate_type: str, supply_date: date, category_hint: Optional[str]) -> float:
+    cc = country_code.upper()
+    if cc not in EU_COUNTRY_CODES:
+        raise HTTPException(status_code=400, detail=f"Invalid country code: {cc}")
+    
+    with open(f"scripts/data/{cc}.json", "r", encoding="utf-8") as f:
+        import json
+        data = json.load(f)
+   
+    found_rate = None
+    if category_hint:
+        # Suche nach einem reduced_rate-Eintrag mit Kategorie
+        for rr in data.get("reduced_rates", []):
+            if rr["label"].endswith(f":{category_hint}"):
+                found_rate = rr["rate"]
+                break
+        
+    if found_rate:
+        return found_rate
+    else:
+        if rate_type == "standard":
+            return data["standard_rate"]
+        else:
+            raise HTTPException(status_code=404, detail="Rate not found for country/rate_type")
+
+def is_valid_vat(country_code: str, vat_number: Optional[str]) -> bool:
+    vatResponse = asyncio.run(validate_vat(payload=ValidateRequest(country_code=country_code, vat_number=vat_number)))
+    return vatResponse.valid
+    
+    """TODO: Replace by VIES SOAP. Für MVP: wenn format vorhanden, true."""
+    return bool(vat_number and len(vat_number) >= 8)
+
+def should_reverse_charge(supplier: Party, customer: Party, b2x: str) -> bool:
+    """
+    Minimal-Logik:
+    - B2B
+    - innergemeinschaftliche Lieferung/Leistung (verschiedene EU-Länder)
+    - gültige USt-IdNr. beim Kunden
+    """
+    if b2x != "B2B":
+        return False
+    if supplier.country_code.upper() == customer.country_code.upper():
+        return False
+    return is_valid_vat(customer.country_code, customer.vat_number)
+
+
+
+# --- Endpoint ---
+@app.post("/calculate", response_model=CalcResult)
+def calculate_vat(payload: CalcRequest):
+    # 1) Sonderfall: Reverse Charge
+    should_rc = should_reverse_charge(payload.supplier, payload.customer, payload.b2x)
+    if should_rc:
+        amount = payload.amount
+        if payload.basis == "gross":
+            # unter RC gibt es keine inländische VAT im Preis; Brutto==Netto
+            net = amount
+        else:
+            net = amount
+        return CalcResult(
+            country_code=payload.customer.country_code.upper(),
+            applied_rate=0.0,
+            net=net,
+            vat=0.0,
+            gross=net,
+            mechanism="reverse_charge",
+            message="Reverse Charge angewendet; keine USt. berechnet. VAT Nr. des Kunden wurde geprüft.",
+        )
+
+    # 2) Normale Besteuerung im Land des Kunden (vereinfachte Fernverkaufs-/B2C-Logik)
+    target_country = payload.customer.country_code.upper()
+
+    rate = get_rate(
+        country_code=target_country,
+        rate_type=payload.rate_type,
+        supply_date=payload.supply_date,
+        category_hint=payload.category_hint,
+    )
+
+    # 3) Rechnen
+    if payload.basis == "net":
+        net = payload.amount
+        vat = round(net * rate, 2)
+        gross = round(net + vat, 2)
+    else:
+        gross = payload.amount
+        net = round(gross / (1 + rate), 2)
+        vat = round(gross - net, 2)
+
+    mechanism: Literal["normal", "reverse_charge", "zero_rated", "out_of_scope"] = "normal"
+    if rate == 0.0:
+        mechanism = "zero_rated"
+
+    return CalcResult(
+        country_code=target_country,
+        applied_rate=rate,
+        net=net,
+        vat=vat,
+        gross=gross,
+        mechanism=mechanism,
+        message="Reverse nicht Charge angewendet; VAT Nr. des Kunden ist nicht valide.",
+    )
