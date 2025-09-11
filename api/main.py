@@ -3,7 +3,7 @@ from datetime import date
 import re
 from typing import Any, Dict, Literal, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
@@ -16,6 +16,7 @@ from zeep.exceptions import Fault, TransportError
 from datetime import date, datetime, timezone
 import logging
 
+from api.deps import check_and_increment_user_quota, get_current_user
 from calculate import CalcRequest, CalcResult, Party
 from validate_vat import ValidateRequest, ValidateResponse, normalize_inputs
 
@@ -37,6 +38,15 @@ from routes import rates
 
 # --- FastAPI app ---
 app = FastAPI(title="VATify MVP", version="0.1.0")
+from middleware.csrf import CSRFMiddleware
+app.add_middleware(
+    CSRFMiddleware,
+    allow_origins=["https://deine-spa-domain.tld", "http://localhost:5173"],
+    allow_credentials=True,            # wichtig für Cookies
+    allow_methods=["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+    allow_headers=["*"]
+)
+
 app.add_middleware(APIKeyAuthQuotaMiddleware, protected_prefixes=["/v1/"])
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(users.router, prefix="/me", tags=["me"])
@@ -86,47 +96,6 @@ def call_vies_check_vat_raw(country_code: str, number: str):
         "address":     text_of(root, "address"),
     }
 
-# 
-
-# --- Endpoint ---
-@app.post("/validate-vat", response_model=ValidateResponse, tags=["vat"])
-async def validate_vat(payload: ValidateRequest):
-    cc, num = normalize_inputs(payload.vat_number, payload.country_code, payload.number)
-    try:
-        result = await run_in_threadpool(call_vies_check_vat_raw, cc, num)
-        print(result)
-    except Fault as e:
-        raise HTTPException(status_code=502, detail=f"VIES Fault: {getattr(e, 'message', str(e))}")
-    except TransportError:
-        raise HTTPException(status_code=503, detail="VIES-Dienst derzeit nicht erreichbar. Bitte später erneut versuchen.")
-    except Exception:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Unerwarteter Fehler beim VIES-Check.")
-
-    return ValidateResponse(
-        valid=bool(result["valid"]),
-        country_code=str(result["countryCode"]) or cc,
-        vat_number=str(result["vatNumber"]) or num,
-        vies_request_date_raw=str(result["requestDate"]),      # einfach Rohstring übernehmen
-        checked_at=datetime.now(timezone.utc),                 # dein UTC Timestamp
-        name=(str(result["name"]).strip() or None),
-        address=(str(result["address"]).strip() or None),
-    )
-
-
-@app.get("/rates/{country}")
-def get_rates(country: str):
-    country = country.upper()
-
-    if country not in EU_COUNTRY_CODES:
-        raise HTTPException(status_code=400, detail=f"Invalid country code: {country}")
-
-    with open(f"scripts/data/{country}.json", "r", encoding="utf-8") as f:
-        import json
-        data = json.load(f)
-
-    return {"country": country, **data, "source": "EU/VATify"}
 
 
 def get_rate(country_code: str, rate_type: str, supply_date: date, category_hint: Optional[str]) -> float:
@@ -178,9 +147,44 @@ def should_reverse_charge(supplier: Party, customer: Party, b2x: str) -> tuple[b
     return valid, status, notes
 
 
+async def handle_validate_vat(payload: ValidateRequest) -> ValidateResponse:
+    cc, num = normalize_inputs(payload.vat_number, payload.country_code, payload.number)
+    try:
+        result = await run_in_threadpool(call_vies_check_vat_raw, cc, num)
+        print(result)
+    except Fault as e:
+        raise HTTPException(status_code=502, detail=f"VIES Fault: {getattr(e, 'message', str(e))}")
+    except TransportError:
+        raise HTTPException(status_code=503, detail="VIES-Dienst derzeit nicht erreichbar. Bitte später erneut versuchen.")
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Unerwarteter Fehler beim VIES-Check.")
 
-@app.post("/calculate", response_model=CalcResult)
-def calculate_vat(payload: CalcRequest):
+    return ValidateResponse(
+        valid=bool(result["valid"]),
+        country_code=str(result["countryCode"]) or cc,
+        vat_number=str(result["vatNumber"]) or num,
+        vies_request_date_raw=str(result["requestDate"]),      # einfach Rohstring übernehmen
+        checked_at=datetime.now(timezone.utc),                 # dein UTC Timestamp
+        name=(str(result["name"]).strip() or None),
+        address=(str(result["address"]).strip() or None),
+    )
+
+def handle_get_rates(country: str) -> Dict[str, Any]:
+    country = country.upper()
+
+    if country not in EU_COUNTRY_CODES:
+        raise HTTPException(status_code=400, detail=f"Invalid country code: {country}")
+
+    with open(f"scripts/data/{country}.json", "r", encoding="utf-8") as f:
+        import json
+        data = json.load(f)
+
+    return {"country": country, **data, "source": "EU/VATify"}
+
+
+def handle_calculate_vat(payload: CalcRequest) -> CalcResult:
     messages: list[str] = []
     should_rc, vat_status, rc_notes = should_reverse_charge(payload.supplier, payload.customer, payload.b2x)
     messages += rc_notes
@@ -233,3 +237,31 @@ def calculate_vat(payload: CalcRequest):
         messages=messages,
         vat_check_status=vat_status if vat_status != "n/a" else None,
     )
+
+# Endpoints - all secured by middleware
+
+# API-Endpunkte (API-Key-basiert)
+@app.post("/v1/calculate", response_model=CalcResult)
+def calculate_vat(payload: CalcRequest):
+    return handle_calculate_vat(payload)
+
+@app.post("/v1/validate-vat", response_model=ValidateResponse, tags=["vat"])
+async def validate_vat(payload: ValidateRequest):
+    return await handle_validate_vat(payload)
+
+@app.get("/v1/rates/{country}")
+def get_rates(country: str):
+    return handle_get_rates(country)
+
+# --- App-Endpunkte (auth + user-basiert) ---
+@app.post("/app/calculate", response_model=CalcResult)
+async def endpoint_a_app(payload: dict, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
+    return  handle_calculate_vat(payload)
+
+@app.post("/app/validate-vat", response_model=ValidateResponse)
+async def endpoint_b_app(payload: dict, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
+    return await handle_validate_vat(payload)
+
+@app.post("/app/rates/{country}")
+async def endpoint_c_app(country: str, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
+    return await handle_get_rates(country)

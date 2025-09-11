@@ -3,6 +3,8 @@ from datetime import datetime, date
 from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Integer, UniqueConstraint, Date, Text
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import PrimaryKeyConstraint
+from sqlalchemy.dialects.postgresql import UUID
 
 Base = declarative_base()
 
@@ -51,4 +53,10 @@ class MonthlyQuota(Base):
     month = Column(Date, primary_key=True)
     api_key_id = Column(UUID(as_uuid=True), ForeignKey("api_keys.id", ondelete="CASCADE"), primary_key=True)
     requests = Column(Integer, default=0, nullable=False)
-    __table_args__ = (UniqueConstraint('month','api_key_id', name='uq_month_key'),)
+
+class MonthlyQuotaUser(Base):
+    __tablename__ = "monthly_quota_user"
+    month = Column(Date, nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    requests = Column(Integer, default=0, nullable=False)
+   

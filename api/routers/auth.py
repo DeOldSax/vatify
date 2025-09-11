@@ -47,6 +47,17 @@ async def login(data: LoginIn, response: Response, request: Request, db: AsyncSe
     response.set_cookie("access_token", access, **cookie_params, max_age=settings.ACCESS_TOKEN_MINUTES*60)
     response.set_cookie("refresh_token", refresh, **cookie_params, max_age=settings.REFRESH_TOKEN_DAYS*24*3600)
 
+    import secrets
+    csrf = secrets.token_urlsafe(32)
+    response.set_cookie(
+        "csrf_token", csrf,
+        httponly=False,  # MUSS lesbar sein
+        secure=settings.COOKIE_SECURE,
+        samesite=settings.COOKIE_SAMESITE,
+        domain=settings.COOKIE_DOMAIN or None,
+        max_age=settings.ACCESS_TOKEN_MINUTES*60
+    )
+
     return UserOut(id=str(user.id), email=user.email, username=user.username, plan=user.plan, email_verified=user.email_verified)
 
 @router.post("/refresh", response_model=UserOut)
