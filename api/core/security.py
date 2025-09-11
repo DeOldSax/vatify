@@ -1,14 +1,14 @@
 import hmac, hashlib, secrets
 from datetime import datetime, timedelta, timezone
-from passlib.hash import argon2
 import jwt
+from passlib.hash import bcrypt
 from core.config import settings
 
 def hash_password(pw: str) -> str:
-    return argon2.hash(pw)
+      return bcrypt.hash(pw)
 
 def verify_password(pw: str, pw_hash: str) -> bool:
-    return argon2.verify(pw, pw_hash)
+      return bcrypt.verify(pw, pw_hash)
 
 def create_token(sub: str, minutes: int) -> str:
     now = datetime.now(timezone.utc)

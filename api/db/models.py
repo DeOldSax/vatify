@@ -1,6 +1,6 @@
 import uuid
-from datetime import datetime, date
-from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Integer, UniqueConstraint, Date, Text
+from datetime import datetime, date, timezone
+from sqlalchemy import Column, String, Boolean, DateTime, func, ForeignKey, Integer, UniqueConstraint, Date, Text
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import PrimaryKeyConstraint
@@ -16,7 +16,7 @@ class User(Base):
     password_hash = Column(Text, nullable=False)
     email_verified = Column(Boolean, default=False, nullable=False)
     plan = Column(String, default="free", nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     api_keys = relationship("ApiKey", back_populates="user", cascade="all, delete-orphan")
 
@@ -26,7 +26,7 @@ class SessionToken(Base):
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     refresh_hash = Column(String, nullable=False, unique=True)
     user_agent = Column(String, nullable=True)
-    expires_at = Column(DateTime, nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
 
 class ApiKey(Base):
     __tablename__ = "api_keys"
@@ -37,7 +37,7 @@ class ApiKey(Base):
     prefix = Column(String, nullable=False)
     last4 = Column(String, nullable=False)
     revoked = Column(Boolean, default=False, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     user = relationship("User", back_populates="api_keys")
 
@@ -46,7 +46,7 @@ class UsageCounter(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     api_key_id = Column(UUID(as_uuid=True), ForeignKey("api_keys.id", ondelete="CASCADE"), nullable=False, index=True)
     endpoint = Column(String, nullable=False)
-    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
+    timestamp = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 class MonthlyQuota(Base):
     __tablename__ = "monthly_quota"
@@ -56,7 +56,7 @@ class MonthlyQuota(Base):
 
 class MonthlyQuotaUser(Base):
     __tablename__ = "monthly_quota_user"
-    month = Column(Date, nullable=False)
+    month = Column(Date, nullable=False, primary_key=True)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     requests = Column(Integer, default=0, nullable=False)
    

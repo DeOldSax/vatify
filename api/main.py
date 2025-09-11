@@ -16,7 +16,7 @@ from zeep.exceptions import Fault, TransportError
 from datetime import date, datetime, timezone
 import logging
 
-from api.deps import check_and_increment_user_quota, get_current_user
+from deps import check_and_increment_user_quota, get_current_user
 from calculate import CalcRequest, CalcResult, Party
 from validate_vat import ValidateRequest, ValidateResponse, normalize_inputs
 
@@ -37,16 +37,17 @@ EU_COUNTRY_CODES = {
 from routes import rates
 
 # --- FastAPI app ---
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="VATify MVP", version="0.1.0")
 from middleware.csrf import CSRFMiddleware
 app.add_middleware(
-    CSRFMiddleware,
+    CORSMiddleware,
     allow_origins=["https://deine-spa-domain.tld", "http://localhost:5173"],
     allow_credentials=True,            # wichtig für Cookies
     allow_methods=["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
     allow_headers=["*"]
 )
-
+app.add_middleware(CSRFMiddleware)
 app.add_middleware(APIKeyAuthQuotaMiddleware, protected_prefixes=["/v1/"])
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(users.router, prefix="/me", tags=["me"])
