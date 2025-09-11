@@ -19,6 +19,9 @@ import logging
 from calculate import CalcRequest, CalcResult, Party
 from validate_vat import ValidateRequest, ValidateResponse, normalize_inputs
 
+from routers import auth, users, apikeys
+from middleware.quota import APIKeyAuthQuotaMiddleware
+
 logger = logging.getLogger("vatify")
 
 
@@ -34,6 +37,11 @@ from routes import rates
 
 # --- FastAPI app ---
 app = FastAPI(title="VATify MVP", version="0.1.0")
+app.add_middleware(APIKeyAuthQuotaMiddleware, protected_prefixes=["/v1/"])
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(users.router, prefix="/me", tags=["me"])
+app.include_router(apikeys.router, prefix="/apikeys", tags=["api-keys"])
+
 app.include_router(rates.router)
 
 # Create a single zeep client (thread-safe calls via threadpool)
