@@ -146,40 +146,39 @@ def get_rate(country_code: str, rate_type: str, supply_date: date, category_hint
         else:
             raise HTTPException(status_code=404, detail="Rate not found for country/rate_type")
 
-def is_valid_vat(country_code: str, vat_number: Optional[str]) -> bool:
-    vatResponse = asyncio.run(validate_vat(payload=ValidateRequest(country_code=country_code, vat_number=vat_number)))
-    return vatResponse.valid
-    
-    """TODO: Replace by VIES SOAP. Für MVP: wenn format vorhanden, true."""
-    return bool(vat_number and len(vat_number) >= 8)
+def is_valid_vat(country_code: str, vat_number: Optional[str]) -> tuple[bool, str]:
+    try:
+        resp = asyncio.run(validate_vat(payload=ValidateRequest(country_code=country_code, vat_number=vat_number)))
+        return bool(resp.valid), "validated"
+    except Exception:
+        # konservativ: kein RC, aber deklarieren
+        return False, "unavailable"
 
-def should_reverse_charge(supplier: Party, customer: Party, b2x: str) -> bool:
-    """
-    Minimal-Logik:
-    - B2B
-    - innergemeinschaftliche Lieferung/Leistung (verschiedene EU-Länder)
-    - gültige USt-IdNr. beim Kunden
-    """
+
+def should_reverse_charge(supplier: Party, customer: Party, b2x: str) -> tuple[bool, str, list[str]]:
+    notes = []
     if b2x != "B2B":
-        return False
+        return False, "n/a", notes
     if supplier.country_code.upper() == customer.country_code.upper():
-        return False
-    return is_valid_vat(customer.country_code, customer.vat_number)
+        return False, "n/a", notes
+    if supplier.country_code.upper() not in EU_COUNTRY_CODES or customer.country_code.upper() not in EU_COUNTRY_CODES:
+        notes.append("No EU intra-community supply → no reverse charge.")
+        return False, "n/a", notes
+    valid, status = is_valid_vat(customer.country_code, customer.vat_number)
+    if not valid:
+        notes.append("Customer VAT number invalid or unavailable → Reverse Charge not applied.")
+    return valid, status, notes
 
 
 
-# --- Endpoint ---
 @app.post("/calculate", response_model=CalcResult)
 def calculate_vat(payload: CalcRequest):
-    # 1) Sonderfall: Reverse Charge
-    should_rc = should_reverse_charge(payload.supplier, payload.customer, payload.b2x)
+    messages: list[str] = []
+    should_rc, vat_status, rc_notes = should_reverse_charge(payload.supplier, payload.customer, payload.b2x)
+    messages += rc_notes
+
     if should_rc:
-        amount = payload.amount
-        if payload.basis == "gross":
-            # unter RC gibt es keine inländische VAT im Preis; Brutto==Netto
-            net = amount
-        else:
-            net = amount
+        net = payload.amount  # unabhängig von basis, unter RC gibt's keine inländische VAT
         return CalcResult(
             country_code=payload.customer.country_code.upper(),
             applied_rate=0.0,
@@ -187,12 +186,11 @@ def calculate_vat(payload: CalcRequest):
             vat=0.0,
             gross=net,
             mechanism="reverse_charge",
-            message="Reverse Charge angewendet; keine USt. berechnet. VAT Nr. des Kunden wurde geprüft.",
+            messages=messages + ["Reverse Charge applied; invoice net without VAT."],
+            vat_check_status=vat_status,
         )
 
-    # 2) Normale Besteuerung im Land des Kunden (vereinfachte Fernverkaufs-/B2C-Logik)
     target_country = payload.customer.country_code.upper()
-
     rate = get_rate(
         country_code=target_country,
         rate_type=payload.rate_type,
@@ -200,19 +198,22 @@ def calculate_vat(payload: CalcRequest):
         category_hint=payload.category_hint,
     )
 
-    # 3) Rechnen
     if payload.basis == "net":
-        net = payload.amount
+        net = round(payload.amount, 2)
         vat = round(net * rate, 2)
         gross = round(net + vat, 2)
     else:
-        gross = payload.amount
+        gross = round(payload.amount, 2)
         net = round(gross / (1 + rate), 2)
         vat = round(gross - net, 2)
 
-    mechanism: Literal["normal", "reverse_charge", "zero_rated", "out_of_scope"] = "normal"
+    mechanism: Literal["normal","reverse_charge","zero_rated","out_of_scope"] = "normal"
     if rate == 0.0:
         mechanism = "zero_rated"
+
+    # Wenn B2B aber kein RC möglich war, Hinweise mitgeben
+    if payload.b2x == "B2B" and payload.supplier.country_code.upper() != payload.customer.country_code.upper():
+        messages.append("No Reverse Charge applied; VAT charged normally.")
 
     return CalcResult(
         country_code=target_country,
@@ -221,5 +222,6 @@ def calculate_vat(payload: CalcRequest):
         vat=vat,
         gross=gross,
         mechanism=mechanism,
-        message="Reverse nicht Charge angewendet; VAT Nr. des Kunden ist nicht valide.",
+        messages=messages,
+        vat_check_status=vat_status if vat_status != "n/a" else None,
     )

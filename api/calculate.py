@@ -26,4 +26,5 @@ class CalcResult(BaseModel):
     vat: float
     gross: float
     mechanism: Literal["normal", "reverse_charge", "zero_rated", "out_of_scope"]
-    message: Optional[str]
+    messages: list[str] = []
+    vat_check_status: Optional[Literal["validated","unavailable","n/a"]] = None
