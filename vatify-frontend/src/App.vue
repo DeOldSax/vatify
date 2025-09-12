@@ -1,13 +1,17 @@
-<!-- src/App.vue -->
 <template>
-  <div class="min-h-screen bg-gray-50 text-gray-900">
-    <header class="border-b bg-white">
-      <div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-        <h1 class="text-lg font-semibold">Vatify Dashboard</h1>
+  <div class="min-h-screen bg-slate-50 text-slate-800">
+    <!-- Header -->
+    <header class="border-b bg-white shadow-soft">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+        <!-- Logo / Title -->
+        <h1 class="text-xl font-semibold tracking-tight text-brand-700">
+          Vatify <span class="text-sm text-gray-600">- EU VAT API for validation & rates</span> 
+        </h1>
+
+        <!-- Right Actions -->
         <div class="flex items-center gap-3" v-if="isAuthenticated">
-          <span class="text-sm text-gray-600">Eingeloggt als {{ user?.email }}</span>
           <button
-            class="rounded-md border px-3 py-1.5 text-sm hover:bg-gray-50"
+            class="px-3 py-1.5 rounded-lg border border-gray-300 text-sm font-medium text-slate-700 bg-white hover:bg-gray-50 focus:ring-2 focus:ring-brand-500"
             @click="onLogout"
           >
             Logout
@@ -16,11 +20,13 @@
       </div>
     </header>
 
-    <main class="mx-auto max-w-5xl px-4 py-6">
+    <!-- Main -->
+    <main class="mx-auto max-w-6xl px-4 py-6">
       <router-view />
     </main>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';

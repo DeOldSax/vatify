@@ -122,23 +122,45 @@ const curlVies = computed(() => {
 <template>
   <div class="space-y-8">
     <!-- A) VALIDATE VAT -->
-    <section class="border rounded p-4 space-y-3">
-      <h3 class="font-medium">VAT prüfen</h3>
-      <div class="flex gap-2">
-        <input v-model="validateVat" class="flex-1 rounded border px-3 py-2" placeholder="z.B. DE811907980" />
-        <button class="px-4 py-2 rounded bg-indigo-600 text-white" @click="onValidate">Check</button>
-      </div>
-      <div class="text-sm text-gray-500">Status: <code>{{ validateStatus || '—' }}</code></div>
-      <pre class="bg-gray-50 border rounded p-3 text-sm overflow-auto">{{ validateResult || '(noch keine Antwort)' }}</pre>
+   <section class="rounded-2xl bg-white space-y-3">
+  <label class="text-sm font-medium text-slate-700">vat_number</label>
 
-      <div class="border rounded">
-        <div class="px-3 py-2 border-b bg-gray-50 text-sm font-medium flex items-center justify-between">
-          <span>cURL (Bearer)</span>
-          <button class="text-xs px-2 py-1 border rounded" @click="navigator.clipboard.writeText(curlValidate)">Copy</button>
-        </div>
-        <pre class="p-3 bg-black text-white text-sm overflow-auto">{{ curlValidate }}</pre>
-      </div>
-    </section>
+  <div class="flex gap-2">
+    <input
+      v-model="validateVat"
+      placeholder="z.B. DE811907980"
+      class="flex-1 rounded-lg border border-slate-300 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500"
+    />
+    <button
+      class="px-4 py-2 rounded-lg bg-brand-600 text-white font-medium shadow-soft hover:bg-brand-700 disabled:opacity-50"
+      @click="onValidate"
+      :disabled="validateLoading"
+    >
+      <svg v-if="validateLoading" class="w-4 h-4 mr-1 inline animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 4v2m0 12v2m8-8h-2M6 12H4m12.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0l-1.414-1.414M7.05 7.05 5.636 5.636"/>
+</svg>
+<span v-else>Check</span>
+
+    </button>
+  </div>
+
+  <div class="flex items-center gap-2 text-sm">
+    <span class="text-slate-500">Status:</span>
+    <span v-if="validateStatus"
+          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs"
+          :class="validateStatus.startsWith('2')
+            ? 'bg-green-500/10 text-green-700'
+            : 'bg-danger-500/10 text-danger-700'">
+      {{ validateStatus }}
+    </span>
+    <span v-else class="text-slate-400">—</span>
+  </div>
+
+  <pre class="bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-sm overflow-auto">
+{{ validateResult || '(noch keine Antwort)' }}
+  </pre>
+</section>
 
     <!-- B) CALCULATE RATE -->
     <section class="border rounded p-4 space-y-3">
