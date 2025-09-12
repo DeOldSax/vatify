@@ -1,3 +1,4 @@
+import uuid
 from fastapi import Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -31,7 +32,13 @@ async def get_current_user(request: Request, db: AsyncSession = Depends(get_db))
     except Exception:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
-    user = await db.scalar(select(User).where(User.id.cast(str) == sub))
+    # sub -> UUID konvertieren
+    try:
+        user_id = uuid.UUID(sub)
+    except (ValueError, TypeError):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+    user = await db.scalar(select(User).where(User.id == user_id))
     if not user:
         raise HTTPException(status_code=401, detail="User not found")
     return user

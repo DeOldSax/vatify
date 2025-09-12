@@ -1,10 +1,11 @@
 import uuid
 from datetime import datetime, date, timezone
-from sqlalchemy import Column, String, Boolean, DateTime, func, ForeignKey, Integer, UniqueConstraint, Date, Text
+from sqlalchemy import Column, String, Boolean, DateTime, func, ForeignKey, Integer, UniqueConstraint, Date, Text, text
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import PrimaryKeyConstraint
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column
 
 Base = declarative_base()
 
@@ -16,7 +17,13 @@ class User(Base):
     password_hash = Column(Text, nullable=False)
     email_verified = Column(Boolean, default=False, nullable=False)
     plan = Column(String, default="free", nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    #created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    created_at = mapped_column(
+        DateTime(timezone=True),
+        server_default=text("now()"),          # server-side default
+        default=func.now(),                    # optional client fallback
+        nullable=False,
+    )
 
     api_keys = relationship("ApiKey", back_populates="user", cascade="all, delete-orphan")
 
@@ -37,8 +44,12 @@ class ApiKey(Base):
     prefix = Column(String, nullable=False)
     last4 = Column(String, nullable=False)
     revoked = Column(Boolean, default=False, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-
+    created_at = mapped_column(
+        DateTime(timezone=True),
+        server_default=text("now()"),          # server-side default
+        default=func.now(),                    # optional client fallback
+        nullable=False,
+    )
     user = relationship("User", back_populates="api_keys")
 
 class UsageCounter(Base):
@@ -57,6 +68,6 @@ class MonthlyQuota(Base):
 class MonthlyQuotaUser(Base):
     __tablename__ = "monthly_quota_user"
     month = Column(Date, nullable=False, primary_key=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, primary_key=True)
     requests = Column(Integer, default=0, nullable=False)
    

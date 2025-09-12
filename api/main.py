@@ -38,14 +38,14 @@ from routes import rates
 
 # --- FastAPI app ---
 from fastapi.middleware.cors import CORSMiddleware
-app = FastAPI(title="VATify MVP", version="0.1.0")
+app = FastAPI(title="VATify MVP", version="0.1.0", redirect_slashes=False)
 from middleware.csrf import CSRFMiddleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://deine-spa-domain.tld", "http://localhost:5173"],
+    allow_origins=["https://localhost:5173"],
     allow_credentials=True,            # wichtig für Cookies
     allow_methods=["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
-    allow_headers=["*"]
+    allow_headers=["Content-Type","Authorization","X-Requested-With","x-csrf-token"]
 )
 app.add_middleware(CSRFMiddleware)
 app.add_middleware(APIKeyAuthQuotaMiddleware, protected_prefixes=["/v1/"])
@@ -256,11 +256,11 @@ def get_rates(country: str):
 
 # --- App-Endpunkte (auth + user-basiert) ---
 @app.post("/app/calculate", response_model=CalcResult)
-async def endpoint_a_app(payload: dict, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
+async def endpoint_a_app(payload: CalcRequest, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
     return  handle_calculate_vat(payload)
 
 @app.post("/app/validate-vat", response_model=ValidateResponse)
-async def endpoint_b_app(payload: dict, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
+async def endpoint_b_app(payload: ValidateRequest, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
     return await handle_validate_vat(payload)
 
 @app.post("/app/rates/{country}")

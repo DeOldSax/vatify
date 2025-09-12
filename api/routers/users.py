@@ -4,7 +4,7 @@ from sqlalchemy import select, func
 from datetime import date
 from deps import get_current_user
 from db.session import get_db
-from db.models import MonthlyQuota
+from db.models import MonthlyQuota, MonthlyQuotaUser
 from schemas.user import UsageOut
 from core.config import settings
 
@@ -24,10 +24,13 @@ async def me(user=Depends(get_current_user)):
 async def my_usage(month: str | None = None, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     from datetime import datetime
     m = date.today().replace(day=1) if month is None else datetime.strptime(month, "%Y-%m").date().replace(day=1)
-    row = await db.get(MonthlyQuota, {"month": m, "api_key_id": None})  # optional: gesamt je user (wenn du eine user-aggregierte Tabelle willst)
-    # Für MVP: Summe über seine Keys
+
     total = 0
-    res = await db.execute(select(func.sum(MonthlyQuota.requests)).where(MonthlyQuota.month == m))
-    s = res.scalar() or 0
-    total = int(s)
+    api_quota = await db.execute(select(func.sum(MonthlyQuota.requests)).where(MonthlyQuota.month == m))
+    s = api_quota.scalar() or 0
+
+    app_user_quota = await db.execute(select(func.sum(MonthlyQuotaUser.requests)).where(MonthlyQuotaUser.month == m))
+    t = app_user_quota.scalar() or 0
+
+    total = int(s) + t
     return UsageOut(total=total, by_endpoint={})

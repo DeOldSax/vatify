@@ -1,5 +1,11 @@
 uvicorn main:app --reload
 
+# start with ssl
+uvicorn main:app \
+  --host 0.0.0.0 --port 8000 \
+  --ssl-certfile /mnt/c/Users/mail/localhost+2.pem \
+  --ssl-keyfile  /mnt/c/Users/mail/localhost+2-key.pem
+
 
 pytest -v test_validate_vat.py
 
