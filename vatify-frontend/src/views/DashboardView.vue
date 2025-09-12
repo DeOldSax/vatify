@@ -126,13 +126,13 @@
       </button>
     </div>
     <!-- Validate VAT – neues Design -->
-<section v-if="active =='validate'" class="rounded-2xl bg-white space-y-3">
+<section v-if="active =='validate'" class="rounded-2xl mt-4 bg-white space-y-3">
   <label class="text-sm font-medium text-slate-700">vat_number</label>
 
-  <div class="flex gap-2">
+  <div class="flex gap-2 mt-2">
     <input
       v-model="validateVat"
-      placeholder="z.B. DE811907980"
+      placeholder="e.g. DE811907980"
       class="flex-1 rounded-lg border border-slate-300 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500"
     />
     <button
@@ -162,7 +162,7 @@
   </div>
 
   <pre class="bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-sm overflow-auto">
-{{ validateResult || '(noch keine Antwort)' }}
+{{ validateResult || '{}' }}
   </pre>
 </section>
   </section>
@@ -270,7 +270,7 @@ async function sendJson(url: string, body: any) {
 // ---------------------------
 // A) VALIDATE VAT (ein Feld)
 // ---------------------------
-const validateVat = ref('DE811907980')
+const validateVat = ref("")
 const validateStatus = ref('')
 const validateResult = ref<string>('')
 
