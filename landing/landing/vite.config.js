@@ -12,6 +12,7 @@ export default defineConfig({
         blog: resolve(__dirname, 'blog.html'),
         imprint: resolve(__dirname, 'imprint.html'),
         privacy: resolve(__dirname, 'privacy.html'),
+        alternatives: resolve(__dirname, 'alternatives.html'),
       },
     },
   },
