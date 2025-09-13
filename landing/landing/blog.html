@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Validate EU VAT Numbers via API (VIES) – cURL Guide | Vatify</title>
     <meta name="description" content="Learn how to validate EU VAT IDs over an API using Vatify's /v1/validate-vat endpoint. Includes a copy‑paste cURL example, sample response, and best practices." />
-    <link rel="canonical" href="https://vatify.dev/blog/validate-eu-vat-api" />
+    <link rel="canonical" href="https://vatifytax.app/blog/validate-eu-vat-api" />
     <meta name="robots" content="index,follow" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Validate EU VAT Numbers via API (VIES) – cURL Guide" />
     <meta property="og:description" content="Copy‑paste cURL request to validate EU VAT numbers with Vatify. See typical responses and reliability tips." />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://vatify.dev/blog/validate-eu-vat-api" />
+    <meta property="og:url" content="https://vatifytax.app/blog/validate-eu-vat-api" />
     <meta property="og:site_name" content="Vatify" />
 
     <!-- Twitter -->
@@ -30,8 +30,6 @@
       "@type": "Article",
       "headline": "Validate EU VAT Numbers via API (VIES) – cURL Guide",
       "description": "How to validate EU VAT IDs using Vatify's /v1/validate-vat endpoint with a simple cURL request.",
-      "author": {"@type": "Organization", "name": "Vatify"},
-      "publisher": {"@type": "Organization", "name": "Vatify"},
       "datePublished": "2025-09-13",
       "dateModified": "2025-09-13"
     }
@@ -67,16 +65,16 @@
       <p class="lead text-gray-600">This guide shows how to check an EU VAT number programmatically using the <code>/v1/validate-vat</code> endpoint. You’ll get a copy‑paste <strong>cURL</strong> request, a typical JSON response, and best‑practice tips for reliability and compliance.</p>
 
       <h2 id="endpoint">Endpoint</h2>
-      <pre class="code bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">POST https://api.vatify.dev/v1/validate-vat</pre>
+      <pre class="code bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">POST https://api.vatifytax.app/v1/validate-vat</pre>
 
       <h2 id="request">Request (cURL)</h2>
       <p>Send your API key via the <code>Authorization: Bearer &lt;API_KEY&gt;</code> header and include the VAT number as JSON:</p>
       <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
         <div class="flex items-center justify-between">
           <div class="text-sm text-gray-500">cURL</div>
-          <button class="copy text-xs px-3 py-1 rounded border" data-copy="curl -s https://api.vatify.dev/v1/validate-vat -H 'Authorization: Bearer <API_KEY>' -H 'Content-Type: application/json' -d '{&quot;vat_number&quot;:&quot;DE811907980&quot;}'">Copy</button>
+          <button class="copy text-xs px-3 py-1 rounded border" data-copy="curl -s https://api.vatifytax.app/v1/validate-vat -H 'Authorization: Bearer <API_KEY>' -H 'Content-Type: application/json' -d '{&quot;vat_number&quot;:&quot;DE811907980&quot;}'">Copy</button>
         </div>
-        <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">curl -s https://api.vatify.dev/v1/validate-vat \
+        <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">curl -s https://api.vatifytax.app/v1/validate-vat \
   -H "Authorization: Bearer <API_KEY>" \
   -H "Content-Type": "application/json" \
   -d '{"vat_number":"DE811907980"}'</pre>
