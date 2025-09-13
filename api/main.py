@@ -20,7 +20,7 @@ from deps import check_and_increment_user_quota, get_current_user
 from calculate import CalcRequest, CalcResult, Party
 from validate_vat import ValidateRequest, ValidateResponse, normalize_inputs
 
-from routers import auth, users, apikeys
+from routers import auth, users, apikeys, billing
 from middleware.quota import APIKeyAuthQuotaMiddleware
 
 logger = logging.getLogger("vatify")
@@ -52,7 +52,7 @@ app.add_middleware(APIKeyAuthQuotaMiddleware, protected_prefixes=["/v1/"])
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(users.router, prefix="/me", tags=["me"])
 app.include_router(apikeys.router, prefix="/apikeys", tags=["api-keys"])
-
+app.include_router(billing.router, tags=["billing"])
 app.include_router(rates.router)
 
 # Create a single zeep client (thread-safe calls via threadpool)

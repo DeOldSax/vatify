@@ -13,9 +13,10 @@
       </div>
       <div v-else class="text-sm text-slate-500">Lade…</div>
     </section>
-
+   <BillingView v-if="user" :user="user" />
     <!-- Usage Card -->
      <section class="rounded-2xl shadow-card border border-gray-200 bg-white p-6">
+     
       <div class="mb-2 flex items-center justify-between">
         <h3 class="text-lg font-semibold">Usage</h3>
         <button
@@ -42,12 +43,12 @@
       <div v-else-if="usage" class="space-y-2">
         <div class="flex items-center justify-between text-sm">
           <span>Used App and API calls</span>
-          <span class="font-medium">{{ usage.data.total }} / 30</span>
+          <span class="font-medium">{{ usage.data.total }} / {{ usage.data.max_quota }}</span>
         </div>
         <div class="h-2 w-full rounded bg-gray-100">
           <div
             class="h-2 bg-brand-500 rounded bg-black"
-            :style="{ width: Math.min(100, Math.round((usage.data.total / 30) * 100)) + '%' }"
+            :style="{ width: Math.min(100, Math.round((usage.data.total / usage.data.max_quota) * 100)) + '%' }"
           />
         </div>
         <p v-if="usage.period" class="text-xs text-gray-500">Periode: {{ usage.period }}</p>
@@ -253,6 +254,7 @@ const curlSnippet = computed(() => snippets[active.value])
 
 
 import { apiFetch } from '@/apiClient';
+import BillingView from './BillingView.vue';
 const hJson = { 'Content-Type': 'application/json' }
 const pretty = (x: unknown) => {
   try { return JSON.stringify(x, null, 2) } catch { return String(x) }

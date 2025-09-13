@@ -25,6 +25,12 @@ class User(Base):
         nullable=False,
     )
 
+    # --- Stripe Felder (neu) ---
+    stripe_customer_id = Column(String, nullable=True, index=True)          # z.B. "cus_..."
+    stripe_subscription_id = Column(String, nullable=True)                   # z.B. "sub_..."
+    subscription_status = Column(String, nullable=True)                      # "active" | "trialing" | ...
+    current_period_end = Column(DateTime(timezone=True), nullable=True)  
+
     api_keys = relationship("ApiKey", back_populates="user", cascade="all, delete-orphan")
 
 class SessionToken(Base):

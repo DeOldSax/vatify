@@ -20,3 +20,7 @@ pytest -v test_validate_vat.py
 - alembic revision --autogenerate -m "added field xyz"
 - anwenden: alembic upgrade head
 
+
+# Strip 
+stripe listen --forward-to https://localhost:8000/billing/webhook --skip-verify
+

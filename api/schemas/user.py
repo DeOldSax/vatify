@@ -4,3 +4,4 @@ from typing import Dict
 class UsageOut(BaseModel):
     total: int
     by_endpoint: Dict[str, int]
+    max_quota: int

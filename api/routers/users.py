@@ -17,12 +17,16 @@ async def me(user=Depends(get_current_user)):
         "email": user.email,
         "username": user.username,
         "plan": user.plan,
-        "emailVerified": user.email_verified
+        "emailVerified": user.email_verified,
+        "subscriptionStatus": user.subscription_status,
+        "currentPeriodEnd": user.current_period_end.isoformat() if user.current_period_end else None
     }
 
 @router.get("/usage", response_model=UsageOut)
 async def my_usage(month: str | None = None, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     from datetime import datetime
+    max_quota = settings.FREE_MONTHLY_QUOTA if user.subscription_status != "active" else 1000
+
     m = date.today().replace(day=1) if month is None else datetime.strptime(month, "%Y-%m").date().replace(day=1)
 
     user_keys = await db.execute(select(ApiKey.id).where(ApiKey.user_id == user.id))
@@ -39,4 +43,4 @@ async def my_usage(month: str | None = None, db: AsyncSession = Depends(get_db),
     t = app_user_quota.scalar() or 0
 
     total = int(s) + int(t)
-    return UsageOut(total=total, by_endpoint={})
+    return UsageOut(total=total, by_endpoint={}, max_quota=max_quota)

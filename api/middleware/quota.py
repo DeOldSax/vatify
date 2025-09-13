@@ -6,6 +6,7 @@ from sqlalchemy import select, text
 from datetime import datetime, date
 import asyncio
 
+from deps import get_current_user
 from db.session import AsyncSessionLocal
 from db.models import ApiKey, MonthlyQuota, UsageCounter
 from core.config import settings
@@ -44,9 +45,15 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
             month = date.today().replace(day=1)
             agg = await db.get(MonthlyQuota, {"month": month, "api_key_id": rec.id})
             used = agg.requests if agg else 0
-            limit = settings.FREE_MONTHLY_QUOTA  # für MVP: planabhängig => Join User + plan
+
+            user = get_current_user(request, db)
+            if user.subscription_status == "active":
+                limit = 1000  # für Pro-User
+            else:
+                limit = settings.FREE_MONTHLY_QUOTA  # für MVP: planabhängig => Join User + plan
+            
             if used >= limit:
-                return JSONResponse({"error":"Monthly quota exceeded"}, status_code=429)
+                return JSONResponse({"error":"Free Monthly quota exceeded"}, status_code=429)
 
             # Rate Limit (einfaches In-Memory Token-Bucket pro Worker – für Prod besser Redis)
             # Für MVP: überspringen oder minimaler Sleep/Counter -> hier weggelassen.

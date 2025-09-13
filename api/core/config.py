@@ -31,4 +31,9 @@ class Settings(BaseSettings):
     COOKIE_SAMESITE: str = "lax"
     COOKIE_DOMAIN: str | None = None
 
+    STRIPE_SECRET_KEY: str
+    STRIPE_WEBHOOK_SECRET: str
+    STRIPE_PRICE_BASIC: str
+    BASE_URL: str
+
 settings = Settings()

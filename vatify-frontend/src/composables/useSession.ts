@@ -6,12 +6,15 @@ export type User = {
   id: string | number;
   email: string;
   username?: string;
+  subscriptionStatus?: string;
+  currentPeriodEnd?: string;
   // weitere Felder nach Bedarf
 };
 
 export type Usage = {
   total: number;
   by_endpoint: Record<string, number>;
+  max_quota: number; // z.B. 1000
   period?: string; // z.B. 'monthly'
 };
 
