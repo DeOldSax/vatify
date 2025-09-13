@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <title>Imprint / Impressum – Vatify</title>
+    <!-- Tailwind optional: remove if you don’t load it globally -->
+    <script>
+      // simple language toggle without any framework
+      document.addEventListener("DOMContentLoaded", () => {
+        const setLang = (lang) => {
+          document.documentElement.setAttribute("data-lang", lang);
+          localStorage.setItem("imprint_lang", lang);
+        };
+        const saved = localStorage.getItem("imprint_lang") || "en";
+        setLang(saved);
+        document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
+          btn.addEventListener("click", () => setLang(btn.dataset.langBtn));
+        });
+      });
+    </script>
+    <style>
+      /* Minimal styles so this works even without Tailwind */
+      :root { color-scheme: light dark; }
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif; margin: 0; }
+      .wrap { max-width: 880px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+      h1 { font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem); margin: 0 0 1rem; }
+      h2 { font-size: 1.125rem; margin: 2rem 0 0.5rem; }
+      .muted { opacity: 0.8; }
+      .card { border: 1px solid color-mix(in oklab, CanvasText 15%, Canvas 85%); border-radius: 1rem; padding: 1.25rem; }
+      .grid { display: grid; gap: 1rem; }
+      .lang-switch { display: inline-flex; gap: .5rem; border: 1px solid color-mix(in oklab, CanvasText 15%, Canvas 85%); border-radius: .75rem; padding: .25rem; }
+      .lang-switch button { border: 0; background: none; padding: .5rem .75rem; border-radius: .5rem; cursor: pointer; }
+      [data-lang="en"] .de, [data-lang="de"] .en { display: none; }
+      a { color: color-mix(in oklab, CanvasText 40%, LinkText 60%); }
+      address { font-style: normal; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="grid" style="align-items:center; grid-template-columns: 1fr auto;">
+        <div>
+          <h1>Imprint <span class="muted">/ Impressum</span></h1>
+          <p class="muted">Vatify – EU VAT API for Developers</p>
+        </div>
+        <div class="lang-switch" aria-label="Language switch">
+          <button data-lang-btn="en" aria-label="Switch to English">EN</button>
+          <button data-lang-btn="de" aria-label="Auf Deutsch umschalten">DE</button>
+        </div>
+      </header>
+
+      <!-- English -->
+      <section class="en card" itemscope itemtype="https://schema.org/Organization">
+        <h2>Website Operator (§ 5 TMG)</h2>
+        <p>
+          <span itemprop="name">Vatify - David Englert</span><br />
+          <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress">Kiefernweg 2</span><br />
+            <span itemprop="postalCode">63849</span> <span itemprop="addressLocality">Leidersbach</span><br />
+            <span itemprop="addressCountry">Germany</span>
+          </address>
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Email: <a itemprop="email" href="mailto:vatify@davidenglert.de">vatify@davidenglert.de</a><br />
+        </p>
+<!---
+        <h2>VAT & Register</h2>
+        <p>
+          VAT ID (USt-IdNr.): <span class="mono">{{ DE######### }}</span><br />
+          Commercial Register: {{ e.g., Amtsgericht {{ City }}, HRB ###### }}<br />
+          Managing Director(s): {{ Name(s) }}
+        </p>
+    -->
+
+        <h2>Responsible for Content (German MStV)</h2>
+        <p>
+            David Englert, Kiefernweg 2, 63849 Leidersbach, Deutschland
+        </p>
+
+        <h2>No Tax or Legal Advice</h2>
+        <p>
+          The information and services on this website are provided for technical and informational purposes only and do not constitute tax, legal, or financial advice.
+          Please consult a qualified tax advisor or attorney for advice tailored to your situation.
+        </p>
+
+        <h2>Liability for Content</h2>
+        <p>
+          We prepare our content with care, but cannot guarantee completeness, accuracy, or timeliness.
+          Obligations to remove or block the use of information under general laws remain unaffected.
+        </p>
+
+        <h2>Liability for External Links</h2>
+        <p>
+          Our site contains links to external websites. We have no influence over their content and therefore cannot assume liability for them.
+          The respective provider or operator is always responsible for the content of linked pages.
+        </p>
+
+        <h2>Copyright</h2>
+        <p>
+          Content and works created by the site operator are subject to copyright.
+          Any reproduction, editing, distribution, or use outside the limits of copyright law requires prior written consent.
+        </p>
+
+        <h2>EU Online Dispute Resolution</h2>
+        <p>
+          The European Commission provides a platform for Online Dispute Resolution (ODR): 
+          <a href="https://ec.europa.eu/consumers/odr/" rel="noopener">https://ec.europa.eu/consumers/odr/</a>. 
+          We are neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration board.
+        </p>
+
+        <p class="muted">Last updated: 2025-09-13 </p>
+      </section>
+
+      <!-- Deutsch -->
+      <section class="de card" itemscope itemtype="https://schema.org/Organization">
+        <h2>Dienstanbieter (§ 5 TMG)</h2>
+        <p>
+          <span itemprop="name">Vatify – David Englert</span><br />
+          <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress">Kiefernweg 2</span><br />
+            <span itemprop="postalCode">63849</span> <span itemprop="addressLocality">Leidersbach</span><br />
+            <span itemprop="addressCountry">Deutschland</span>
+          </address>
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+          E-Mail: <a itemprop="email" href="mailto:vatify@davidenglert.de">vatify@davidenglert.de</a><br />
+        </p>
+<!--
+        <h2>Umsatzsteuer & Registerangaben</h2>
+        <p>
+          USt-IdNr.: <span class="mono">{{ DE######### }}</span><br />
+          Handelsregister: {{ z. B. Amtsgericht {{ Ort }}, HRB ###### }}<br />
+          Vertreten durch: {{ Name(n) der Geschäftsführung }}
+        </p>
+-->
+        <h2>Verantwortlich i.S.d. § 18 Abs. 2 MStV</h2>
+        <p>
+            David Englert, Kiefernweg 2, 63849 Leidersbach, Deutschland
+        </p>
+
+        <h2>Kein Steuer- oder Rechtsrat</h2>
+        <p>
+          Die Informationen und Leistungen auf dieser Website dienen ausschließlich technischen und informativen Zwecken
+          und stellen keine Steuer-, Rechts- oder Finanzberatung dar. Für eine Beratung zu Ihrem konkreten Fall wenden Sie sich bitte an eine/n Steuerberater/in oder Rechtsanwalt/Rechtsanwältin.
+        </p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+          Die Inhalte wurden mit größter Sorgfalt erstellt, dennoch kann keine Gewähr für Richtigkeit, Vollständigkeit und Aktualität übernommen werden.
+          Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben unberührt.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+          Unser Angebot enthält Links zu externen Websites, auf deren Inhalte wir keinen Einfluss haben.
+          Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+          Die vom Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem Urheberrecht.
+          Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der vorherigen schriftlichen Zustimmung.
+        </p>
+
+        <h2>EU-Streitbeilegung</h2>
+        <p>
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+          <a href="https://ec.europa.eu/consumers/odr/" rel="noopener">https://ec.europa.eu/consumers/odr/</a>.
+          Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <p class="muted">Zuletzt aktualisiert: 13.09.2025 </p>
+      </section>
+
+    </main>
+  </body>
+</html>

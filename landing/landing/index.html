@@ -20,6 +20,7 @@
             <a href="#code" class="hover:text-brand-600">APIs</a>
             <a href="#pricing" class="hover:text-brand-600">Pricing</a>
             <a href="#faq" class="hover:text-brand-600">FAQ</a>
+            <a href="/blog.html" class="hover:text-brand-600">Blog</a>
           </nav>
           <div class="flex items-center gap-3">
             <a href="#docs" class="hidden sm:inline text-sm text-gray-600 hover:text-gray-900">Docs</a>
@@ -29,36 +30,38 @@
       </div>
     </header>
 
-    <section class="relative overflow-hidden">
-      <div class="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-brand-100 blur-3xl"></div>
-      <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight">EU VAT API for Developers</h1>
-            <p class="mt-4 text-lg text-gray-600">Validate VAT IDs, fetch current rates, and calculate the correct VAT – all with three endpoints. Fast, simple, reliable.</p>
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-              <a href="#code" class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-soft">Try now</a>
-              <a href="#pricing" class="px-5 py-3 rounded-xl border border-gray-200 hover:border-gray-300">See Free Tier</a>
-            </div>
-            <!--
-            <div class="mt-6 text-sm text-gray-500">SDKs coming soon: JS/TS • Python • PHP</div>
-            -->
-          </div>
-          <div class="relative">
-            <div class="rounded-2xl border border-gray-200 bg-white shadow-soft p-4">
-              <div class="text-xs text-gray-500">Example</div>
-              <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">
+<section class="relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-brand-100 blur-3xl hidden md:block"></div>
+  <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight break-words">
+          EU VAT API for Developers
+        </h1>
+        <p class="mt-4 text-lg text-gray-600">
+          Validate VAT IDs, fetch current rates, and calculate the correct VAT – all with three endpoints. Fast, simple, reliable.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="#code" class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-soft">Try now</a>
+          <a href="#pricing" class="px-5 py-3 rounded-xl border border-gray-200 hover:border-gray-300">See Free Tier</a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="rounded-2xl border border-gray-200 bg-white shadow-soft p-4">
+          <div class="text-xs text-gray-500">Example</div>
+          <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm break-words whitespace-pre-wrap">
 <span class="text-gray-500"># Validate VAT (cURL)</span>
 curl -s https://api.vatify.dev/v1/validate-vat \
   -H "Authorization: Bearer <API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{"vat_number":"DE811907980"}' | jq
-              </pre>
-            </div>
-          </div>
+          </pre>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
 
     <section class="border-t border-gray-100 bg-gray-50/60">
       <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
@@ -163,9 +166,9 @@ curl -s https://api.vatify.dev/v1/validate-vat \
       <div class="max-w-6xl mx-auto px-4 py-10 text-sm text-gray-500 flex flex-wrap items-center justify-between gap-4">
         <div>© <span id="year"></span> Vatify</div>
         <div class="flex items-center gap-4">
-          <a href="#" class="hover:text-gray-900">Imprint</a>
-          <a href="#" class="hover:text-gray-900">Privacy</a>
-          <a href="#" class="hover:text-gray-900">Contact</a>
+          <a href="/imprint.html" class="hover:text-gray-900">Imprint</a>
+          <a href="/privacy.html" class="hover:text-gray-900">Privacy</a>
+          <a href="/imprint.html" class="hover:text-gray-900">Contact</a>
         </div>
       </div>
     </footer>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Privacy Policy / Datenschutzerklärung – Vatify</title>
+    <style>
+      :root { color-scheme: light dark }
+      body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif }
+      .wrap { max-width: 880px; margin: 0 auto; padding: 2rem 1rem 4rem }
+      h1 { font-size: clamp(1.75rem,1.2rem+2vw,2.5rem); margin: 0 0 1rem }
+      h2 { font-size: 1.125rem; margin: 2rem 0 .5rem }
+      .muted { opacity:.8 }
+      .card { border: 1px solid color-mix(in oklab, CanvasText 15%, Canvas 85%); border-radius: 1rem; padding: 1.25rem }
+      .grid { display:grid; gap:1rem }
+      .lang-switch { display:inline-flex; gap:.5rem; border: 1px solid color-mix(in oklab, CanvasText 15%, Canvas 85%); border-radius:.75rem; padding:.25rem }
+      .lang-switch button { border:0; background:none; padding:.5rem .75rem; border-radius:.5rem; cursor:pointer }
+      [data-lang="en"] .de, [data-lang="de"] .en { display:none }
+      a { color: color-mix(in oklab, CanvasText 40%, LinkText 60%) }
+      ul { padding-left: 1.25rem }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace }
+      details { border:1px solid color-mix(in oklab, CanvasText 15%, Canvas 85%); border-radius:.75rem; padding:.75rem 1rem; margin:.75rem 0 }
+      summary { cursor:pointer; font-weight:600 }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const setLang = (l) => { document.documentElement.dataset.lang = l; localStorage.setItem("privacy_lang", l) };
+        setLang(localStorage.getItem("privacy_lang") || document.documentElement.dataset.lang || "en");
+        document.querySelectorAll("[data-lang-btn]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.langBtn)));
+      });
+    </script>
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="grid" style="align-items:center; grid-template-columns: 1fr auto;">
+        <div>
+          <h1>Privacy Policy <span class="muted">/ Datenschutzerklärung</span></h1>
+          <p class="muted">Vatify – EU VAT API for Developers</p>
+        </div>
+        <div class="lang-switch" aria-label="Language switch">
+          <button data-lang-btn="en" aria-label="Switch to English">EN</button>
+          <button data-lang-btn="de" aria-label="Auf Deutsch umschalten">DE</button>
+        </div>
+      </header>
+
+      <!-- ENGLISH -->
+      <section class="en card" itemscope itemtype="https://schema.org/Organization">
+        <h2>Controller</h2>
+        <p>
+          <span itemprop="name">Vatify – David Englert</span><br/>
+          <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress">Kiefernweg 2</span>, <span itemprop="postalCode">63849</span> <span itemprop="addressLocality">Leidersbach</span>, Germany
+          </address>
+          Email: <a href="mailto:vatify@davidenglert.de" itemprop="email">vatify@davidenglert.de</a><br/>
+        </p>
+
+        <h2>Scope</h2>
+        <p>This policy applies to our website https://vatifytax.app, dashboard/app, API, and related services.</p>
+
+        <h2>Personal Data We Process & Purposes</h2>
+        <ul>
+          <li><strong>Server logs (website & API)</strong>: IP address, request metadata, timestamps, user agent, error traces – for security, fraud prevention, and service reliability (Art. 6(1)(f) GDPR).</li>
+          <li><strong>Account data</strong>: name, email, password hash, company, plan – to create and manage your account and provide the service (Art. 6(1)(b)).</li>
+          <li><strong>API usage data</strong>: API key, request counts, endpoint usage, status codes, billing metrics – to operate the API, rate-limit, and bill (Art. 6(1)(b) and (f)).</li>
+          <li><strong>Billing</strong>: invoice details, billing address, payment method tokens – processed via {{ Stripe }} as our payment processor (Art. 6(1)(b)).</li>
+          <li><strong>Support/Contact</strong>: contents of messages, attachments, metadata – to respond to inquiries (Art. 6(1)(b) or (f)).</li>
+          <li><strong>Newsletter/Marketing (optional)</strong>: email and interaction events – based on consent (Art. 6(1)(a)) which you can withdraw anytime.</li>
+          <li><strong>Analytics (optional)</strong>: pseudonymous usage data and cookies – only with your consent (Art. 6(1)(a)).</li>
+        </ul>
+
+        <h2>Legal Bases</h2>
+        <p>We rely on contract performance (Art. 6(1)(b)), legitimate interests (Art. 6(1)(f); e.g., security, product improvement), consent (Art. 6(1)(a)), and legal obligations (Art. 6(1)(c)).</p>
+
+        <h2>Cookies & Tracking</h2>
+        <p>We use essential cookies for login/session and security. Non-essential analytics/marketing cookies load only after your consent via the cookie banner. You can change your preferences anytime under <a href="{{ link-to-cookie-settings }}">Cookie Settings</a>.</p>
+
+        <h2>Payments</h2>
+        <p>Payments are processed by  Stripe, Inc. / Stripe Payments Europe . We do not store full card numbers. See Stripe’s privacy policy for details.</p>
+<!--
+        <h2>Sub-Processors</h2>
+        <p>We use service providers under data processing agreements, for example:</p>
+        <ul>
+          <li>Hosting/Infrastructure: {{ e.g., Hetzner, AWS, Fly.io }} (compute, databases, storage)</li>
+          <li>Payments: Stripe</li>
+          <li>Email: {{ e.g., Postmark, Sendgrid }}</li>
+          <li>Error/Monitoring: {{ e.g., Sentry }} (pseudonymous telemetry)</li>
+          <li>Analytics (if enabled): {{ e.g., Plausible (EU) / Google Analytics }} (consent-based)</li>
+          <li>Helpdesk: {{ e.g., Intercom }} (only if used)</li>
+        </ul>
+-->
+        <h2>International Transfers</h2>
+        <p>If data is transferred outside the EEA, we use appropriate safeguards (Art. 46), e.g., EU Standard Contractual Clauses and vendor assessments.</p>
+
+        <h2>Retention</h2>
+        <ul>
+          <li>Account & billing data: for the duration of your account and as required by tax/commercial law (typically 6–10 years under German law).</li>
+          <li>Server/API logs: 30–180 days unless needed longer for security/abuse investigations.</li>
+          <li>Support tickets: 24 months.</li>
+          <li>Analytics identifiers: per vendor settings or until consent withdrawal.</li>
+        </ul>
+
+        <h2>Your Rights (GDPR)</h2>
+        <p>You have rights to access, rectification, erasure, restriction, portability, and objection, and to withdraw consent at any time. You may lodge a complaint with your local supervisory authority, e.g., <em>Berliner Beauftragte für Datenschutz und Informationsfreiheit</em>.</p>
+
+        <h2>Security</h2>
+        <p>We apply industry-standard security measures (encryption in transit, access controls, least privilege). No system is 100% secure.</p>
+<!--
+        <h2>Children</h2>
+        <p>Our service is not directed to children under 16. We do not knowingly process their data.</p>
+
+        <h2>Data Processing Agreements (DPA)</h2>
+        <p>Business customers can request a DPA at <a href="mailto:{{ privacy@yourdomain }}">{{ privacy@yourdomain }}</a>. We also sign vendor DPAs with our sub-processors.</p>
+
+        <h2>Contact & DPO</h2>
+        <p>For privacy requests, contact <a href="mailto:{{ privacy@yourdomain }}">{{ privacy@yourdomain }}</a>. {{ If you have a Data Protection Officer, list them here. }}</p>
+-->
+        <h2>Changes to this Policy</h2>
+        <p>We may update this policy to reflect changes in our processing or legal requirements. We will indicate the latest revision date below.</p>
+
+        <p class="muted">Last updated: 2025-09-13 </p>
+
+        <p class="muted">Also see: <a href="imprint.html">Imprint / Impressum</a></p>
+      </section>
+
+      <!-- DEUTSCH -->
+      <section class="de card">
+        <h2>Verantwortlicher</h2>
+        <p>
+          <strong>Vatify – David Englert</strong><br/>
+          <address>Kiefernweg 2, 63849 Leidersbach, Deutschland</address>
+          E-Mail: <a href="mailto:vatify@davidenglert.de">vatify@davidenglert.de</a><br/>
+        </p>
+
+        <h2>Geltungsbereich</h2>
+        <p>Diese Erklärung gilt für unsere Website https://vatifytax.app, das Dashboard/die App, die API und dazugehörige Dienste.</p>
+
+        <h2>Welche Daten wir verarbeiten & Zwecke</h2>
+        <ul>
+          <li><strong>Server-Logs (Website & API)</strong>: IP, Request-Metadaten, Zeitstempel, User-Agent, Fehlerspuren – zur Sicherheit, Betrugsprävention und Stabilität (Art. 6 Abs. 1 lit. f DSGVO).</li>
+          <li><strong>Kontodaten</strong>: Name, E-Mail, Passwort-Hash, Firma, Tarif – zur Kontoerstellung und Leistungserbringung (Art. 6 Abs. 1 lit. b).</li>
+          <li><strong>API-Nutzungsdaten</strong>: API-Key, Request-Zähler, Endpunktnutzung, Statuscodes, Abrechnungsmetriken – zum Betrieb der API, Rate-Limiting und Abrechnung (Art. 6 Abs. 1 lit. b/f).</li>
+          <li><strong>Zahlungen</strong>: Rechnungsdaten, Anschrift, Zahlungs-Token – verarbeitet über {{ Stripe }} (Art. 6 Abs. 1 lit. b).</li>
+          <li><strong>Support/Kontakt</strong>: Inhalte Ihrer Nachrichten, Anhänge, Metadaten – zur Beantwortung von Anfragen (Art. 6 Abs. 1 lit. b/f).</li>
+          <li><strong>Newsletter/Marketing (optional)</strong>: E-Mail und Interaktionen – auf Basis Ihrer Einwilligung (Art. 6 Abs. 1 lit. a), widerrufbar.</li>
+          <li><strong>Analytics (optional)</strong>: pseudonyme Nutzungsdaten & Cookies – nur mit Einwilligung (Art. 6 Abs. 1 lit. a).</li>
+        </ul>
+
+        <h2>Rechtsgrundlagen</h2>
+        <p>Vertragserfüllung (Art. 6 Abs. 1 lit. b), berechtigte Interessen (lit. f; z. B. Sicherheit, Produktverbesserung), Einwilligung (lit. a) und rechtliche Pflichten (lit. c).</p>
+
+        <h2>Cookies & Tracking</h2>
+        <p>Wir setzen essentielle Cookies für Login/Sitzung und Sicherheit ein. Nicht-essentielle Analytics/Marketing-Cookies werden erst nach Ihrer Einwilligung über das Cookie-Banner geladen. Einstellungen: <a href="{{ link-to-cookie-settings }}">Cookie-Einstellungen</a>.</p>
+
+        <h2>Zahlungsabwicklung</h2>
+        <p>Zahlungen werden über Stripe abgewickelt. Wir speichern keine vollständigen Kartennummern. Details entnehmen Sie bitte der Datenschutzerklärung von Stripe.</p>
+<!--
+        <h2>Auftragsverarbeiter</h2>
+        <p>Wir setzen Dienstleister auf Basis von Auftragsverarbeitungsverträgen ein, u. a.:</p>
+        <ul>
+          <li>Hosting/Infrastruktur: {{ z. B. Hetzner, AWS, Fly.io }}</li>
+          <li>Zahlungen: Stripe</li>
+          <li>E-Mail: {{ z. B. Postmark, Sendgrid }}</li>
+          <li>Error/Monitoring: {{ z. B. Sentry }}</li>
+          <li>Analytics (falls aktiviert): {{ z. B. Plausible (EU) / Google Analytics }}</li>
+          <li>Helpdesk: {{ z. B. Intercom }}</li>
+        </ul>
+        <h2>Drittlandübermittlungen</h2>
+        <p>Bei Übermittlungen außerhalb des EWR setzen wir geeignete Garantien ein (Art. 46 DSGVO), z. B. EU-Standardvertragsklauseln.</p>
+-->
+
+        <h2>Speicherdauer</h2>
+        <ul>
+          <li>Konto- & Abrechnungsdaten: für die Dauer des Vertrags und gesetzliche Aufbewahrung (i. d. R. 6–10 Jahre in Deutschland).</li>
+          <li>Server/API-Logs: 30–180 Tage, länger nur bei Sicherheitsfällen.</li>
+          <li>Support-Tickets: 24 Monate.</li>
+          <li>Analytics-Kennungen: gemäß Anbieter oder bis Widerruf der Einwilligung.</li>
+        </ul>
+
+        <h2>Ihre Rechte</h2>
+        <p>Sie haben Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch sowie Widerruf von Einwilligungen. Beschwerden richten Sie an Ihre zuständige Aufsichtsbehörde, z. B. die/den Berliner Beauftragte/n für Datenschutz und Informationsfreiheit.</p>
+
+        <h2>Sicherheit</h2>
+        <p>Wir treffen branchenübliche Schutzmaßnahmen (Transportverschlüsselung, Zugriffskontrollen, Least Privilege). Absolute Sicherheit kann nicht garantiert werden.</p>
+<!--
+        <h2>Auftragsverarbeitungsvertrag (AVV)</h2>
+        <p>Geschäftskunden können einen AVV anfordern: <a href="mailto:{{ privacy@yourdomain }}">{{ privacy@yourdomain }}</a>. Mit unseren Unterauftragnehmern schließen wir ebenfalls AVVs.</p>
+
+        <h2>Kontakt & Datenschutzbeauftragte/r</h2>
+        <p>Für Datenschutzanfragen: <a href="mailto:{{ privacy@yourdomain }}">{{ privacy@yourdomain }}</a>. {{ Falls vorhanden, DSB hier nennen. }}</p>
+-->
+        <h2>Änderungen</h2>
+        <p>Wir können diese Erklärung anpassen, wenn sich Verarbeitungen oder rechtliche Vorgaben ändern. Das Aktualisierungsdatum steht unten.</p>
+
+        <p class="muted">Zuletzt aktualisiert: 13.09.2025 </p>
+        <p class="muted">Siehe auch: <a href="imprint.html">Impressum</a></p>
+      </section>
+
+    </main>
+  </body>
+</html>
