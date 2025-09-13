@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vatify – EU VAT API for Developers</title>
+    <meta name="description" content="Validate EU VAT IDs, fetch rates, and calculate VAT with three simple API endpoints. Fast response times, clear pricing, ready to use." />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="bg-white text-gray-900">
+    <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-gray-100">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <a href="#" class="flex items-center gap-2">
+            <div class="h-8 w-8 rounded-xl bg-brand-600 grid place-content-center text-white font-bold">V</div>
+            <span class="font-semibold">Vatify</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm">
+            <a href="#features" class="hover:text-brand-600">Features</a>
+            <a href="#code" class="hover:text-brand-600">APIs</a>
+            <a href="#pricing" class="hover:text-brand-600">Pricing</a>
+            <a href="#faq" class="hover:text-brand-600">FAQ</a>
+          </nav>
+          <div class="flex items-center gap-3">
+            <a href="#docs" class="hidden sm:inline text-sm text-gray-600 hover:text-gray-900">Docs</a>
+            <button class="px-4 py-2 rounded-lg bg-brand-600 text-white text-sm hover:bg-brand-700 shadow-soft" id="cta-signup">Get API Key</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-brand-100 blur-3xl"></div>
+      <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight">EU VAT API for Developers</h1>
+            <p class="mt-4 text-lg text-gray-600">Validate VAT IDs, fetch current rates, and calculate the correct VAT – all with three endpoints. Fast, simple, reliable.</p>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a href="#code" class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-soft">Try now</a>
+              <a href="#pricing" class="px-5 py-3 rounded-xl border border-gray-200 hover:border-gray-300">See Free Tier</a>
+            </div>
+            <!--
+            <div class="mt-6 text-sm text-gray-500">SDKs coming soon: JS/TS • Python • PHP</div>
+            -->
+          </div>
+          <div class="relative">
+            <div class="rounded-2xl border border-gray-200 bg-white shadow-soft p-4">
+              <div class="text-xs text-gray-500">Example</div>
+              <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-gray-500"># Validate VAT (cURL)</span>
+curl -s https://api.vatify.dev/v1/validate-vat \
+  -H "Authorization: Bearer <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{"vat_number":"DE811907980"}' | jq
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-gray-100 bg-gray-50/60">
+      <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-soft">
+          <div class="text-brand-600 font-semibold">3 Endpoints</div>
+          <div class="text-gray-600 mt-1">validate-vat • calculate • rates/{country}</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-soft">
+          <div class="text-brand-600 font-semibold">Fast Integration</div>
+          <div class="text-gray-600 mt-1">Copyable snippets, clear responses, no overhead.</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-soft">
+          <div class="text-brand-600 font-semibold">Transparent Pricing</div>
+          <div class="text-gray-600 mt-1">Free Tier & fair Pro plan – cancel anytime.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="max-w-6xl mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">What Vatify Offers</h2>
+          <ul class="mt-6 space-y-4 text-gray-700">
+            <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>VAT Validation</strong> against official sources, with stable responses for your backend.</span></li>
+            <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>Tax Rates</strong> per country & type (standard/reduced), including date reference.</span></li>
+            <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>Calculation</strong> of the correct VAT for your orders (standard or category hint).</span></li>
+            <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>DX</strong>: JSON by default, clear error messages, examples for cURL & JS.</span></li>
+          </ul>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+            <div class="text-sm text-gray-500">Fast</div>
+            <div class="font-semibold"><span class="text-brand-600">&lt; 200ms</span> typical response time (EU region)</div>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+            <div class="text-sm text-gray-500">Robust</div>
+            <div class="font-semibold">Clean error codes & rate limits</div>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+            <div class="text-sm text-gray-500">Simple</div>
+            <div class="font-semibold">3 endpoints, clear schemas</div>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+            <div class="text-sm text-gray-500">Secure</div>
+            <div class="font-semibold">Bearer tokens, no overhead</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold">Pricing</h2>
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-soft">
+          <div class="text-sm text-gray-500">Starter</div>
+          <div class="mt-1 text-3xl font-bold">Free</div>
+          <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+            <li>• 30 requests/month</li>
+            <li>• All 3 endpoints</li>
+            <li>• Community support</li>
+          </ul>
+          <button class="mt-6 w-full px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700" id="cta-free">Get Started</button>
+        </div>
+        <div class="p-6 rounded-2xl border-2 border-brand-600 bg-white shadow-soft">
+          <div class="text-sm text-gray-500">Pro</div>
+          <div class="mt-1 text-3xl font-bold">€9<span class="text-base font-medium text-gray-500">/month</span></div>
+          <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+            <li>• 1.000 requests/month</li>
+            <li>• Higher limits</li>
+            <li>• Email support</li>
+          </ul>
+          <button class="mt-6 w-full px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700" id="cta-pro">Upgrade</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="border-t border-gray-100 bg-gray-50/60">
+      <div class="max-w-6xl mx-auto px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold">FAQ</h2>
+        <div class="mt-6 grid md:grid-cols-2 gap-6 text-gray-700">
+          <div>
+            <h3 class="font-semibold">Is there a Free Tier?</h3>
+            <p class="text-gray-600">Yes, 30 requests/month – ideal for testing.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold">Which countries are supported?</h3>
+            <p class="text-gray-600">All EU countries. The <code>rates</code> route returns country-specific VAT rates.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold">How do I authenticate?</h3>
+            <p class="text-gray-600">Use <code>Authorization: Bearer &lt;API_KEY&gt;</code> header.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold">Are there SDKs?</h3>
+            <p class="text-gray-600">Coming soon. Currently cURL/Fetch examples – enough for the MVP.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-gray-100">
+      <div class="max-w-6xl mx-auto px-4 py-10 text-sm text-gray-500 flex flex-wrap items-center justify-between gap-4">
+        <div>© <span id="year"></span> Vatify</div>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-gray-900">Imprint</a>
+          <a href="#" class="hover:text-gray-900">Privacy</a>
+          <a href="#" class="hover:text-gray-900">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

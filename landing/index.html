@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vatify – EU VAT API für Entwickler</title>
+  <meta name="description" content="Validiere EU-Umsatzsteuer-IDs, hole Steuersätze und berechne VAT mit drei einfachen API-Endpunkten. Schnelle Antwortzeiten, klare Preise, sofort startklar." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config: keep it close to your previous indigo design
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1', // indigo-500
+              600: '#4f46e5', // indigo-600
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px -10px rgba(0,0,0,0.15)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth scroll for in-page anchors */
+    html { scroll-behavior: smooth; }
+    .code { font-feature-settings: 'ss01','tnum','lnum'; }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <!-- Top bar -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2">
+          <div class="h-8 w-8 rounded-xl bg-brand-600 grid place-content-center text-white font-bold">V</div>
+          <span class="font-semibold">Vatify</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#features" class="hover:text-brand-600">Features</a>
+          <a href="#code" class="hover:text-brand-600">APIs</a>
+          <a href="#pricing" class="hover:text-brand-600">Preise</a>
+          <a href="#faq" class="hover:text-brand-600">FAQ</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#docs" class="hidden sm:inline text-sm text-gray-600 hover:text-gray-900">Docs</a>
+          <button class="px-4 py-2 rounded-lg bg-brand-600 text-white text-sm hover:bg-brand-700 shadow-soft" onclick="alert('TODO: Sign-up flow')">Get API Key</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-brand-100 blur-3xl"></div>
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight">EU VAT API für Entwickler</h1>
+          <p class="mt-4 text-lg text-gray-600">Validiere Umsatzsteuer-IDs, hole aktuelle Steuersätze und berechne die richtige VAT – alles mit drei Endpoints. Schnell, simpel, zuverlässig.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <button class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-soft" onclick="document.getElementById('code').scrollIntoView()">Sofort testen</button>
+            <a href="#pricing" class="px-5 py-3 rounded-xl border border-gray-200 hover:border-gray-300">Free Tier ansehen</a>
+          </div>
+          <div class="mt-6 text-sm text-gray-500">SDKs demnächst: JS/TS • Python • PHP</div>
+        </div>
+        <div class="relative">
+          <div class="rounded-2xl border border-gray-200 bg-white shadow-soft p-4">
+            <div class="text-xs text-gray-500">Beispiel</div>
+            <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-gray-500"># VAT validieren (cURL)</span>
+curl -s https://api.vatify.dev/v1/validate-vat \
+  -H "Authorization: Bearer &lt;API_KEY&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"vat_number":"DE811907980"}' | jq
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof / highlights -->
+  <section class="border-t border-gray-100 bg-gray-50/60">
+    <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-soft">
+        <div class="text-brand-600 font-semibold">3 Endpoints</div>
+        <div class="text-gray-600 mt-1">validate-vat • calculate • rates/{country}</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-soft">
+        <div class="text-brand-600 font-semibold">Schnelle Integration</div>
+        <div class="text-gray-600 mt-1">Kopierbare Snippets, klare Antworten, kein Overhead.</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-soft">
+        <div class="text-brand-600 font-semibold">Transparente Preise</div>
+        <div class="text-gray-600 mt-1">Free Tier & fairer Pro-Plan – jederzeit kündbar.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="max-w-6xl mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold">Was Vatify kann</h2>
+        <ul class="mt-6 space-y-4 text-gray-700">
+          <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>VAT-Validierung</strong> gegen offizielle Quellen, mit stabilisierten Responses fürs Backend.</span></li>
+          <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>Steuersätze</strong> pro Land & Typ (standard/reduced), inkl. Datumsbezug.</span></li>
+          <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>Berechnung</strong> der korrekten VAT für deine Orders (standard oder Kategorie-Hinweis).</span></li>
+          <li class="flex gap-3"><span class="text-brand-600 mt-1">✔</span><span><strong>DX</strong>: JSON by default, klare Fehlermeldungen, Beispiele für cURL & JS.</span></li>
+        </ul>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+          <div class="text-sm text-gray-500">Schnell</div>
+          <div class="font-semibold"><span class="text-brand-600">&lt; 200ms</span> typische Antwortzeit (Region EU)</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+          <div class="text-sm text-gray-500">Robust</div>
+          <div class="font-semibold">Saubere Fehlercodes & Rate Limits</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+          <div class="text-sm text-gray-500">Einfach</div>
+          <div class="font-semibold">3 Endpoints, klare Schemas</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 bg-white">
+          <div class="text-sm text-gray-500">Sicher</div>
+          <div class="font-semibold">Bearer Tokens, kein Overhead</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Samples -->
+  <section id="code" class="border-t border-gray-100 bg-gray-50/60">
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold">API Beispiele</h2>
+
+      <div class="mt-6">
+        <div class="flex flex-wrap gap-2 text-sm">
+          <button class="tab px-3 py-2 rounded-lg bg-white border border-gray-200 data-[active=true]:bg-brand-600 data-[active=true]:text-white" data-target="#tab-validate" data-active="true">Validate VAT</button>
+          <button class="tab px-3 py-2 rounded-lg bg-white border border-gray-200" data-target="#tab-calc">Calculate</button>
+          <button class="tab px-3 py-2 rounded-lg bg-white border border-gray-200" data-target="#tab-rates">Rates</button>
+        </div>
+
+        <!-- VALIDATE -->
+        <div id="tab-validate" class="tab-pane mt-4">
+          <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-gray-500">cURL</div>
+              <button class="copy text-xs px-3 py-1 rounded border" data-copy="curl -s https://api.vatify.dev/v1/validate-vat -H 'Authorization: Bearer &lt;API_KEY&gt;' -H 'Content-Type: application/json' -d '{&quot;vat_number&quot;:&quot;DE811907980&quot;}'">Kopieren</button>
+            </div>
+            <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">curl -s https://api.vatify.dev/v1/validate-vat \
+  -H "Authorization: Bearer &lt;API_KEY&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"vat_number":"DE811907980"}'</pre>
+            <div class="mt-4 border-t pt-4">
+              <div class="flex items-center justify-between">
+                <div class="text-sm text-gray-500">JavaScript (fetch)</div>
+                <button class="copy text-xs px-3 py-1 rounded border" data-copy="await fetch('https://api.vatify.dev/v1/validate-vat',{method:'POST',headers:{Authorization:'Bearer &lt;API_KEY&gt;', 'Content-Type':'application/json'},body:JSON.stringify({vat_number:'DE811907980'})}).then(r=>r.json())">Kopieren</button>
+              </div>
+              <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">const res = await fetch("https://api.vatify.dev/v1/validate-vat", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer &lt;API_KEY&gt;",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ vat_number: "DE811907980" }),
+});
+const data = await res.json();</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- CALCULATE -->
+        <div id="tab-calc" class="tab-pane mt-4 hidden">
+          <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-gray-500">cURL</div>
+              <button class="copy text-xs px-3 py-1 rounded border" data-copy="curl -s https://api.vatify.dev/v1/calculate -H 'Authorization: Bearer &lt;API_KEY&gt;' -H 'Content-Type: application/json' -d '{&quot;country_code&quot;:&quot;DE&quot;,&quot;rate_type&quot;:&quot;standard&quot;,&quot;supply_date&quot;:&quot;2025-09-01&quot;}'">Kopieren</button>
+            </div>
+            <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">curl -s https://api.vatify.dev/v1/calculate \
+  -H "Authorization: Bearer &lt;API_KEY&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"country_code":"DE","rate_type":"standard","supply_date":"2025-09-01"}'</pre>
+          </div>
+        </div>
+
+        <!-- RATES -->
+        <div id="tab-rates" class="tab-pane mt-4 hidden">
+          <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-gray-500">cURL</div>
+              <button class="copy text-xs px-3 py-1 rounded border" data-copy="curl -s -H 'Authorization: Bearer &lt;API_KEY&gt;' https://api.vatify.dev/v1/rates/DE">Kopieren</button>
+            </div>
+            <pre class="code mt-2 bg-gray-50 rounded-lg p-4 overflow-x-auto text-sm">curl -s -H "Authorization: Bearer &lt;API_KEY&gt;" \
+  https://api.vatify.dev/v1/rates/DE</pre>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-4 text-sm text-gray-500">Hinweis: Ersetze &lt;API_KEY&gt; mit deinem Schlüssel. Endpunkte laut MVP: <code>/v1/validate-vat</code>, <code>/v1/calculate</code>, <code>/v1/rates/{country_code}</code>.</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">Preise</h2>
+    <div class="mt-8 grid md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-soft">
+        <div class="text-sm text-gray-500">Start</div>
+        <div class="mt-1 text-3xl font-bold">Free</div>
+        <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+          <li>• 100 Requests/Monat</li>
+          <li>• Alle 3 Endpoints</li>
+          <li>• Community Support</li>
+        </ul>
+        <button class="mt-6 w-full px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700" onclick="alert('TODO: Sign-up flow')">Loslegen</button>
+      </div>
+      <div class="p-6 rounded-2xl border-2 border-brand-600 bg-white shadow-soft">
+        <div class="text-sm text-gray-500">Pro</div>
+        <div class="mt-1 text-3xl font-bold">9€<span class="text-base font-medium text-gray-500">/Monat</span></div>
+        <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+          <li>• 10k Requests/Monat</li>
+          <li>• Höhere Limits & SLA</li>
+          <li>• E-Mail Support</li>
+        </ul>
+        <button class="mt-6 w-full px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700" onclick="alert('TODO: Upgrade flow')">Upgrade</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-gray-100 bg-gray-50/60">
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold">FAQ</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6 text-gray-700">
+        <div>
+          <h3 class="font-semibold">Gibt es ein Free Tier?</h3>
+          <p class="text-gray-600">Ja, 100 Requests/Monat – ideal zum Testen.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">Welche Länder werden unterstützt?</h3>
+          <p class="text-gray-600">Alle EU-Länder. Die <code>rates</code>-Route liefert landesspezifische Steuersätze.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">Wie authentifiziere ich?</h3>
+          <p class="text-gray-600">Per <code>Authorization: Bearer &lt;API_KEY&gt;</code> Header.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">Gibt es SDKs?</h3>
+          <p class="text-gray-600">Bald. Aktuell cURL/Fetch Beispiele – reicht fürs MVP.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-sm text-gray-500 flex flex-wrap items-center justify-between gap-4">
+      <div>© <span id="year"></span> Vatify</div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-gray-900">Impressum</a>
+        <a href="#" class="hover:text-gray-900">Datenschutz</a>
+        <a href="#" class="hover:text-gray-900">Kontakt</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    const panes = document.querySelectorAll('.tab-pane');
+    tabs.forEach(btn => btn.addEventListener('click', () => {
+      tabs.forEach(b => b.dataset.active = 'false');
+      panes.forEach(p => p.classList.add('hidden'));
+      btn.dataset.active = 'true';
+      document.querySelector(btn.dataset.target).classList.remove('hidden');
+    }));
+
+    // Copy buttons
+    function decodeHtml(html) {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html; return txt.value;
+    }
+    document.querySelectorAll('.copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const raw = btn.getAttribute('data-copy');
+        const text = decodeHtml(raw);
+        try { await navigator.clipboard.writeText(text); btn.textContent = 'Kopiert!'; setTimeout(()=>btn.textContent='Kopieren',1200); }
+        catch { alert('Kopieren nicht möglich'); }
+      });
+    });
+  </script>
+</body>
+</html>
