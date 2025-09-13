@@ -1,6 +1,6 @@
 {
   "functions": {
-    "**/*.py": {
+    "main.py": {
       "runtime": "python3.12.3",
       "memory": 1024,
       "maxDuration": 10
