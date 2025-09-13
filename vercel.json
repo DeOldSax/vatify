@@ -7,7 +7,7 @@
     }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/main.py" }
+    { "src": "/api/(.*)", "dest": "/api/index.py" }
   ],
   "regions": ["fra1"]
 }
