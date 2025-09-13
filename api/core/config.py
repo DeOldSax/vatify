@@ -36,4 +36,9 @@ class Settings(BaseSettings):
     STRIPE_PRICE_BASIC: str
     BASE_URL: str
 
+    SENTRY_DSN: str
+    SENTRY_TRACES_SAMPLE_RATE: float
+    SENTRY_PROFILES_SAMPLE_RATE: float
+    SENTRY_ENV: str = "production"
+
 settings = Settings()

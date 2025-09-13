@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/**/*.py": {
+      "runtime": "python3.12.3",
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/main.py" }
+  ],
+  "regions": ["fra1"]
+}

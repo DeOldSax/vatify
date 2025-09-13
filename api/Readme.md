@@ -21,6 +21,14 @@ pytest -v test_validate_vat.py
 - anwenden: alembic upgrade head
 
 
-# Strip 
+# Stripe
 stripe listen --forward-to https://localhost:8000/billing/webhook --skip-verify
 
+# logs in sentry:
+- https://vatify.sentry.io/dashboard/default-overview/
+
+# Database in NeonDB
+
+# Frontend in Vercel
+
+# Backend in ?

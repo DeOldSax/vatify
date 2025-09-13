@@ -22,6 +22,8 @@ from validate_vat import ValidateRequest, ValidateResponse, normalize_inputs
 
 from routers import auth, users, apikeys, billing
 from middleware.quota import APIKeyAuthQuotaMiddleware
+import sentry_sdk
+from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 logger = logging.getLogger("vatify")
 
@@ -36,10 +38,22 @@ EU_COUNTRY_CODES = {
 # Note: "EL" = Griechenland (nicht GR). "XI" = Nordirland (UK-Teil für EU-USt).
 from routes import rates
 
+from core.config import settings
+
+sentry_sdk.init(
+    dsn=settings.SENTRY_DSN,
+    traces_sample_rate=float(settings.SENTRY_TRACES_SAMPLE_RATE),
+    profiles_sample_rate=float(settings.SENTRY_PROFILES_SAMPLE_RATE),
+    environment=settings.SENTRY_ENV,
+)
+
 # --- FastAPI app ---
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="VATify MVP", version="0.1.0", redirect_slashes=False)
 from middleware.csrf import CSRFMiddleware
+
+app.add_middleware(SentryAsgiMiddleware)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://localhost:5173"],
@@ -266,3 +280,7 @@ async def endpoint_b_app(payload: ValidateRequest, user=Depends(get_current_user
 @app.post("/app/rates/{country}")
 async def endpoint_c_app(country: str, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
     return await handle_get_rates(country)
+
+@app.get("/api/health")
+def health():
+    return {"ok": True}
