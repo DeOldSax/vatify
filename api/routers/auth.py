@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import hashlib
-from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Response, Request, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from db.session import get_db
@@ -8,11 +8,12 @@ from db.models import User, SessionToken
 from schemas.auth import RegisterIn, LoginIn, UserOut
 from core.security import hash_password, verify_password, create_token
 from core.config import settings
+from utils.notify import notify
 
 router = APIRouter()
 
 @router.post("/register", response_model=UserOut, status_code=201)
-async def register(data: RegisterIn, db: AsyncSession = Depends(get_db)):
+async def register(data: RegisterIn,  bg: BackgroundTasks, db: AsyncSession = Depends(get_db)):
     exists = await db.scalar(select(User).where((User.email == data.email) | (User.username == data.username)))
     if exists:
         raise HTTPException(400, "Email or username already exists")
@@ -20,10 +21,12 @@ async def register(data: RegisterIn, db: AsyncSession = Depends(get_db)):
     db.add(user)
     await db.commit()
     await db.refresh(user)
+    bg.add_task(notify, "🆕 New Registration", {"email": user.email, "id": str(user.id)})
+    
     return UserOut(id=str(user.id), email=user.email, username=user.username, plan=user.plan, email_verified=user.email_verified)
 
 @router.post("/login", response_model=UserOut)
-async def login(data: LoginIn, response: Response, request: Request, db: AsyncSession = Depends(get_db)):
+async def login(data: LoginIn, bg: BackgroundTasks, response: Response, request: Request, db: AsyncSession = Depends(get_db)):
     q = select(User).where((User.email == data.email_or_username) | (User.username == data.email_or_username))
     user = await db.scalar(q)
     if not user or not verify_password(data.password, user.password_hash):
@@ -57,6 +60,8 @@ async def login(data: LoginIn, response: Response, request: Request, db: AsyncSe
         domain=settings.COOKIE_DOMAIN or None,
         max_age=settings.ACCESS_TOKEN_MINUTES*60
     )
+
+    bg.add_task(notify, "🆕 New Login", {"email": user.email, "id": str(user.id)})
 
     return UserOut(id=str(user.id), email=user.email, username=user.username, plan=user.plan, email_verified=user.email_verified)
 
