@@ -41,4 +41,6 @@ class Settings(BaseSettings):
     SENTRY_PROFILES_SAMPLE_RATE: float
     SENTRY_ENV: str = "production"
 
+    SLACK_WEBHOOK_URL: str
+
 settings = Settings()

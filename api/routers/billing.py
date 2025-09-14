@@ -54,8 +54,8 @@ async def create_checkout_session(db: AsyncSession = Depends(get_db), user=Depen
         mode="subscription",
         customer=customer_id,
         line_items=[{"price": settings.STRIPE_PRICE_BASIC, "quantity": 1}],
-        success_url=settings.BASE_URL + "/dashboard?purchase=success&session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=settings.BASE_URL + "/pricing",
+        success_url=settings.BASE_URL,
+        cancel_url=settings.BASE_URL,
         allow_promotion_codes=False,
         metadata={"app_user_id": user_id, "plan": "Vatify Pro Tier"},
     )
