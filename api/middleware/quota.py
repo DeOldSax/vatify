@@ -12,8 +12,6 @@ from db.models import ApiKey, MonthlyQuota, UsageCounter
 from core.config import settings
 from core.security import API_KEY_PREFIX, hash_api_key
 
-EXCLUDED_PATHS = ("/v1/billing",)  #
-
 class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
     def __init__(self, app, protected_prefixes: list[str]):
         super().__init__(app)
@@ -24,10 +22,6 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
         if not any(path.startswith(p) for p in self.protected_prefixes):
             return await call_next(request)
         
-        # Webhook(s) komplett von API-Key/Quota ausnehmen
-        if any(path.startswith(p) for p in EXCLUDED_PATHS):
-            return await call_next(request)
-
         # Header lesen
         key = request.headers.get("x-api-key")
         if not key and (auth := request.headers.get("Authorization", "")):
