@@ -208,3 +208,4 @@ __marimo__/
 
 api/scripts/data/
 *.pem
+api/migrate_prod.sh
