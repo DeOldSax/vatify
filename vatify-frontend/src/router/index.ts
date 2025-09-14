@@ -15,18 +15,20 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const session = useSession();
-  // Falls noch kein User geladen wurde, versuchen
-  if (session.user === null && !session.loading.value) {
-    try { await session.fetchMe(); } catch {}
+  const s = useSession()
+
+  // Einmalige Initialisierung/Restore
+  if (!s.state?.initialized.value && !s.loading.value) {
+    try { await s.fetchMe() } catch {}
   }
 
-  if (to.meta.requiresAuth && !session.isAuthenticated.value) {
-    return { name: 'login', query: { redirect: to.fullPath } };
+  if (to.meta.requiresAuth && !s.isAuthenticated.value) {
+    return { name: 'login', query: { redirect: to.fullPath } }
   }
-  if (to.meta.guestOnly && session.isAuthenticated.value) {
-    return { name: 'dashboard' };
+  if (to.meta.guestOnly && s.isAuthenticated.value) {
+    return { name: 'dashboard' }
   }
-});
+})
+
 
 export default router;

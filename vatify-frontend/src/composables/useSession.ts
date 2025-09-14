@@ -31,12 +31,14 @@ type State = {
   user: User | null;
   loading: boolean;
   error: string | null;
+  initialized: boolean;
 };
 
 const state = reactive<State>({
   user: null,
   loading: false,
   error: null,
+  initialized: false
 });
 
 async function fetchMe() {
@@ -50,6 +52,7 @@ async function fetchMe() {
     state.error = e?.message ?? 'Fehler beim Laden des Users';
   } finally {
     state.loading = false;
+    state.initialized = true;
   }
 }
 

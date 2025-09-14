@@ -12,26 +12,7 @@ from utils.notify import notify
 
 router = APIRouter()
 
-@router.post("/register", response_model=UserOut, status_code=201)
-async def register(data: RegisterIn,  bg: BackgroundTasks, db: AsyncSession = Depends(get_db)):
-    exists = await db.scalar(select(User).where((User.email == data.email) | (User.username == data.username)))
-    if exists:
-        raise HTTPException(400, "Email or username already exists")
-    user = User(email=data.email, username=data.username, password_hash=hash_password(data.password))
-    db.add(user)
-    await db.commit()
-    await db.refresh(user)
-    bg.add_task(notify, "🆕 New Registration", {"email": user.email, "id": str(user.id)})
-    
-    return UserOut(id=str(user.id), email=user.email, username=user.username, plan=user.plan, email_verified=user.email_verified)
-
-@router.post("/login", response_model=UserOut)
-async def login(data: LoginIn, bg: BackgroundTasks, response: Response, request: Request, db: AsyncSession = Depends(get_db)):
-    q = select(User).where((User.email == data.email_or_username) | (User.username == data.email_or_username))
-    user = await db.scalar(q)
-    if not user or not verify_password(data.password, user.password_hash):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-
+async def set_cookie_and_token(response: Response, user: User, request: Request, db: AsyncSession):
     # Access + Refresh
     access = create_token(sub=str(user.id), minutes=settings.ACCESS_TOKEN_MINUTES)
     refresh = create_token(sub=str(user.id), minutes=settings.REFRESH_TOKEN_DAYS*24*60)
@@ -42,7 +23,8 @@ async def login(data: LoginIn, bg: BackgroundTasks, response: Response, request:
                            refresh_hash=refresh_hash,
                            user_agent=request.headers.get("user-agent"),
                            expires_at=datetime.now(timezone.utc)+timedelta(days=settings.REFRESH_TOKEN_DAYS))
-    db.add(session); await db.commit()
+    db.add(session); 
+    await db.commit()
 
     # Cookies setzen (optional; alternativ Header zurückgeben)
     cookie_params = {"httponly": True, "secure": settings.COOKIE_SECURE, "samesite": settings.COOKIE_SAMESITE}
@@ -60,6 +42,30 @@ async def login(data: LoginIn, bg: BackgroundTasks, response: Response, request:
         domain=settings.COOKIE_DOMAIN or None,
         max_age=settings.ACCESS_TOKEN_MINUTES*60
     )
+
+@router.post("/register", response_model=UserOut, status_code=201)
+async def register(data: RegisterIn,  bg: BackgroundTasks, response: Response, request: Request, db: AsyncSession = Depends(get_db)):
+    exists = await db.scalar(select(User).where((User.email == data.email) | (User.username == data.username)))
+    if exists:
+        raise HTTPException(400, "Email or username already exists")
+    user = User(email=data.email, username=data.username, password_hash=hash_password(data.password))
+    db.add(user)
+    await db.commit()
+    await db.refresh(user)
+    bg.add_task(notify, "🆕 New Registration", {"email": user.email, "id": str(user.id)})
+ 
+    await set_cookie_and_token(response, user, request, db)
+
+    return UserOut(id=str(user.id), email=user.email, username=user.username, plan=user.plan, email_verified=user.email_verified)
+
+@router.post("/login", response_model=UserOut)
+async def login(data: LoginIn, bg: BackgroundTasks, response: Response, request: Request, db: AsyncSession = Depends(get_db)):
+    q = select(User).where((User.email == data.email_or_username) | (User.username == data.email_or_username))
+    user = await db.scalar(q)
+    if not user or not verify_password(data.password, user.password_hash):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    await set_cookie_and_token(response, user, request, db)
 
     bg.add_task(notify, "🆕 New Login", {"email": user.email, "id": str(user.id)})
 

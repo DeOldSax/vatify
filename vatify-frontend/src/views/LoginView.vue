@@ -113,7 +113,7 @@ import { useSession } from '@/composables/useSession'
 
 const router = useRouter()
 const route = useRoute()
-const { login, register, loading, error } = useSession()
+const { login, register, loading, error, fetchMe } = useSession()
 
 // Tabs
 const tab = ref<'login' | 'register'>('login')
@@ -140,7 +140,11 @@ async function handleRegister() {
   error.value = '' as any
   try {
     await register(registerForm.value)
-    router.push('/dashboard')
+
+    await fetchMe()
+
+    await router.replace({ name: 'dashboard' })
+    //router.push('dashboard')
   } catch {
     // error wird von useSession gesetzt/weitergereicht
   }

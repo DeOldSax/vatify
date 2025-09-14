@@ -43,4 +43,6 @@ class Settings(BaseSettings):
 
     SLACK_WEBHOOK_URL: str
 
+    ALLOW_ORIGIN: str
+
 settings = Settings()

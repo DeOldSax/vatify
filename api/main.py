@@ -56,8 +56,7 @@ app.add_middleware(SentryAsgiMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
-    #allow_origins=["https://api.vatifytax.app", "https://localhost:5173"],
-    allow_origins=["https://dashboard.vatifytax.app"],
+    allow_origins=[settings.ALLOW_ORIGIN],
     allow_credentials=True,            # wichtig für Cookies
     allow_methods=["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
     allow_headers=["Content-Type","Authorization","X-Requested-With","x-csrf-token"]
