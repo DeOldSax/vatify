@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const items = [
   { name: 'Dashboard', to: '/dashboard', icon: 'M3 12l7-7 7 7M5 10v10h4v-6h6v6h4V10' },
+  { name: 'API Keys', to: '/keys', icon: 'M15 7a3 3 0 1 0-2.83 2H12l-2 2H8v2H6v2h2l4-4h.17A3 3 0 0 0 15 7z' },
   { name: 'API Playground', to: '/api', icon: 'M4 6h16v4H4zm0 6h10v6H4z' },
 ]
 const isActive = (path: string) => route.path.startsWith(path)
