@@ -1,0 +1,33 @@
+{
+  "country": "DK",
+  "standard_rate": 25.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SPORTING_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:UNDERTAKERS_SERVICES"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:WRITERS_SERVICES"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

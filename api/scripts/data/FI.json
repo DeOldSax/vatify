@@ -1,0 +1,81 @@
+{
+  "country": "FI",
+  "standard_rate": 25.5,
+  "reduced_rates": [
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:BROADCASTING_SERVICES"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PERIODICALS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:PHOTOGRAPHS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

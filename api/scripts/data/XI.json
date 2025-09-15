@@ -1,0 +1,21 @@
+{
+  "country": "XI",
+  "standard_rate": 20.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:SUPPLY_ELECTRICITY"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SUPPLY_GAS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

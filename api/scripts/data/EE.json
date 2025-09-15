@@ -1,0 +1,29 @@
+{
+  "country": "EE",
+  "standard_rate": 24.0,
+  "reduced_rates": [
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 13.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

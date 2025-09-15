@@ -1,0 +1,145 @@
+{
+  "country": "SI",
+  "standard_rate": 22.0,
+  "reduced_rates": [
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:RESCUE_EQUIPMENT"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:BICYCLES_RENTAL"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:CERAMICS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:CLOTHING_REPAIR"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:DOMESTIC_CARE"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:ENAMELS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:HAIRDRESSING"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:PHOTOGRAPHS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:PLANT"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:SHOES_REPAIR"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:STREET_CLEANING"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:UNDERTAKERS_SERVICES"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:WINDOW_CLEANING"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    },
+    {
+      "rate": 9.5,
+      "label": "reduced_rate:ZOOLOGICAL"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

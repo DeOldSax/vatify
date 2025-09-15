@@ -1,0 +1,69 @@
+{
+  "country": "LV",
+  "standard_rate": 21.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:MEDICAL_CARE"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SPORTING_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:WRITERS_SERVICES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PERIODICALS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SUPPLY_HEATING"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:WOOD_ARTICLE98"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

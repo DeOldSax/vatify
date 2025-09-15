@@ -1,0 +1,209 @@
+{
+  "country": "LU",
+  "standard_rate": 17.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:CERTAIN_AGRICULTURAL_INPUT"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:CERTAIN_BROADCASTING_SERVICES"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:CHEMICAL_FERTILISERS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:CHILD_WEAR"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:EVENT_ACCESS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:EXEMPTION_SUPERREDUCED"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:FOOD_SERVICE"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:FUNERAL"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:HOLIDAY_ACCOMMODATION"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:NON_OWNED_RESIDENCY_RENOVATION"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:RESIDENTIAL_RENOVATION"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:ROYALTIES"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:SOLAR_PANELS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:SPORTING_FACILITY_ACCESS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:WASTE_TREATMENT"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:WASTE_TREATMENT_REFUSAL"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:ANTIQUES"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:BICYCLES_ELECTRIC"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:BICYCLES_RENTAL"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:CHEMICAL_PESTICIDES_ENVIRONMENT"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:CLOTHING_REPAIR"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:FOSSIL_FUEL"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:HAIRDRESSING"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:HOUSEHOLD"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:PLANT"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:SHOES_REPAIR"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:SUPPLY_ELECTRICITY"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:SUPPLY_GAS"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:SUPPLY_HEATING"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:WINDOW_CLEANING"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:WOOD"
+    },
+    {
+      "rate": 8.0,
+      "label": "reduced_rate:WOOD_ARTICLE98"
+    },
+    {
+      "rate": 8.0,
+      "label": "super_reduced_rate:TEMPORARY_EXEMPTION_RATE"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:CLEANING_PRODUCT"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:CREDIT_MANAGEMENT"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:FUEL_MINERAL_OIL"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:HEAT_COOLING_STEAM"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:NEW_PARKING_RATE"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:PRINTED_ADVERTISING_MATERIAL"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:SECURITY_MANAGEMENT"
+    },
+    {
+      "rate": 14.0,
+      "label": "parking_rate:WINE_FRESH_GRAPE"
+    },
+    {
+      "rate": 14.0,
+      "label": "reduced_rate:FOSSIL_FUEL"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

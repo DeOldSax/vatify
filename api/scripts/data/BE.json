@@ -1,0 +1,209 @@
+{
+  "country": "BE",
+  "standard_rate": 21.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:FOODSTUFFS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:MEDICAL_CARE"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SPORTING_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:WRITERS_SERVICES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:BICYCLES_RENTAL"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:CERAMICS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:CLOTHING_REPAIR"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:CONSTRUCTION"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:ENAMELS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:PHOTOGRAPHS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:PLANT"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:PRIVATE_DWELLINGS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:RENOVATION"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SHOES_REPAIR"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SUPPLY_ELECTRICITY"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SUPPLY_GAS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SUPPLY_HEATING"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SUSTAINABLE_ENERGY"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:UNDERTAKERS_SERVICES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:WOOD_ARTICLE98"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    },
+    {
+      "rate": 12.0,
+      "label": "parking_rate:NEW_PARKING_RATE"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:RESTAURANT"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-29",
+  "source": "TEDB SOAP VatRetrievalService"
+}

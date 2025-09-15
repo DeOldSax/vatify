@@ -1,0 +1,137 @@
+{
+  "country": "IT",
+  "standard_rate": 22.0,
+  "reduced_rates": [
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:CHEMICAL_FERTILISERS"
+    },
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:EXEMPTION_SUPERREDUCED"
+    },
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:TEMPORARY_EXEMPTION_RATE"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:LIVE_EQUINES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SUSTAINABLE_ENERGY"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:FOSSIL_FUEL"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PRIVATE_DWELLINGS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:STREET_CLEANING"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SUPPLY_ELECTRICITY"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SUPPLY_GAS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SUPPLY_HEATING"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:WOOD"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-01-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

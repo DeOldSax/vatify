@@ -1,0 +1,133 @@
+{
+  "country": "CY",
+  "standard_rate": 19.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "not_applicable:PRIVATE_DWELLINGS"
+    },
+    {
+      "rate": 0.0,
+      "label": "not_applicable:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 0.0,
+      "label": "not_applicable:UNDERTAKERS_SERVICES"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:BOOKS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:PERIODICALS"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:THEATRE_PERFORMANCES"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:WASTE_TREATMENT"
+    },
+    {
+      "rate": 3.0,
+      "label": "super_reduced_rate:WASTE_TREATMENT_REFUSAL"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:CHILDREN_CAR_SEATS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:HAIRDRESSING"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:MEDICAL_CARE"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:STREET_CLEANING"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:UNDERTAKERS_SERVICES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-01-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

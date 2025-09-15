@@ -1,0 +1,93 @@
+{
+  "country": "CZ",
+  "standard_rate": 21.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:CHILDREN_CAR_SEATS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:DOMESTIC_CARE"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:MEDICAL_CARE"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:PERIODICALS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:PLANT"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:PRIVATE_DWELLINGS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SUPPLY_HEATING"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:UNDERTAKERS_SERVICES"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

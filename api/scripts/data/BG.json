@@ -1,0 +1,25 @@
+{
+  "country": "BG",
+  "standard_rate": 20.0,
+  "reduced_rates": [
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

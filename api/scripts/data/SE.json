@@ -1,0 +1,85 @@
+{
+  "country": "SE",
+  "standard_rate": 25.0,
+  "reduced_rates": [
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 6.0,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:CLOTHING_REPAIR"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:SHOES_REPAIR"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 12.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

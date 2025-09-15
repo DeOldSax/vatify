@@ -1,0 +1,129 @@
+{
+  "country": "IE",
+  "standard_rate": 23.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:FOODSTUFFS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SOLAR_PANELS"
+    },
+    {
+      "rate": 0.0,
+      "label": "not_applicable:CLOTHING_REPAIR"
+    },
+    {
+      "rate": 0.0,
+      "label": "not_applicable:MEDICAL_CARE"
+    },
+    {
+      "rate": 0.0,
+      "label": "not_applicable:SHOES_REPAIR"
+    },
+    {
+      "rate": 9.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:CERAMICS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:ENAMELS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:HAIRDRESSING"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:PHOTOGRAPHS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:PRIVATE_DWELLINGS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:STREET_CLEANING"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 13.5,
+      "label": "reduced_rate:WINDOW_CLEANING"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

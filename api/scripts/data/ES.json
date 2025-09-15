@@ -1,0 +1,109 @@
+{
+  "country": "ES",
+  "standard_rate": 7.0,
+  "reduced_rates": [
+    {
+      "rate": 4.0,
+      "label": "super_reduced_rate:EXEMPTION_SUPERREDUCED"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:CERAMICS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:ENAMELS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PHOTOGRAPHS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:PRIVATE_DWELLINGS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:STREET_CLEANING"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 10.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

@@ -1,0 +1,57 @@
+{
+  "country": "RO",
+  "standard_rate": 21.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:AGRICULTURAL_PRODUCTION"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:SUSTAINABLE_ENERGY"
+    },
+    {
+      "rate": 11.0,
+      "label": "reduced_rate:WOOD_ARTICLE98"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-08-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

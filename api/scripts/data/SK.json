@@ -1,0 +1,65 @@
+{
+  "country": "SK",
+  "standard_rate": 23.0,
+  "reduced_rates": [
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:ADMISSION_SPORTING_EVENTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:HOUSING_PROVISION"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SPORTING_EVENTS"
+    },
+    {
+      "rate": 19.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 19.0,
+      "label": "reduced_rate:RESTAURANT"
+    },
+    {
+      "rate": 19.0,
+      "label": "reduced_rate:SUPPLY_ELECTRICITY"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

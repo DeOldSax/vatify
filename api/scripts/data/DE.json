@@ -1,0 +1,93 @@
+{
+  "country": "DE",
+  "standard_rate": 19.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:SUPPLY_ELECTRICITY"
+    },
+    {
+      "rate": 0.0,
+      "label": "out_of_scope:BROADCASTING_SERVICES"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:MEDICAL_CARE"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:PERIODICALS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:PLANT"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:SUPPLY_WATER"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:WRITERS_SERVICES"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}

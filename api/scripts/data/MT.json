@@ -1,0 +1,141 @@
+{
+  "country": "MT",
+  "standard_rate": 18.0,
+  "reduced_rates": [
+    {
+      "rate": 0.0,
+      "label": "exempted:BROADCASTING_SERVICES"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:FOODSTUFFS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:MEDICAL_CARE"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SOCIAL_WELLBEING"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:SUPPLY_WATER"
+    },
+    {
+      "rate": 0.0,
+      "label": "exempted:TRANSPORT_PASSENGERS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:100_YEARS_OLD"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:CERAMICS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:CLOTHING_REPAIR"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:DOMESTIC_CARE"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:ENAMELS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:FOODSTUFFS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:IMPRESSIONS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:LOAN_LIBRARIES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:MEDICAL_EQUIPMENT"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:NEWSPAPERS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PERIODICALS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PHARMACEUTICAL_PRODUCTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PHOTOGRAPHS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:PICTURES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:POSTAGE"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SCULPTURES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SCULPTURE_CASTS"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:SHOES_REPAIR"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:TAPESTRIES"
+    },
+    {
+      "rate": 5.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 12.0,
+      "label": "parking_rate:BODY_CARE_SERVICES"
+    },
+    {
+      "rate": 12.0,
+      "label": "parking_rate:CREDIT_MANAGEMENT"
+    },
+    {
+      "rate": 12.0,
+      "label": "parking_rate:HIRING_SHORT_PERIOD"
+    },
+    {
+      "rate": 12.0,
+      "label": "parking_rate:SECURITY_MANAGEMENT"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "TEDB SOAP VatRetrievalService"
+}
