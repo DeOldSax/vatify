@@ -37,6 +37,6 @@ const { user, isAuthenticated, logout } = useSession();
 
 async function onLogout() {
   await logout();
-  router.push({ name: 'login' });
+  router.replace({ name: 'login' });
 }
 </script>

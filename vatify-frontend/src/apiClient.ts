@@ -8,11 +8,9 @@ type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 export type ApiOk<T> = { ok: true; data: T; status: number };
 export type ApiErr = { ok: false; error: { code?: string; message: string; status: number }; status: number };
 export type ApiResult<T> = ApiOk<T> | ApiErr;
-console.log(import.meta.env.VITE_API_BASE_URL)
 let BASE_URL = import.meta.env.VITE_API_BASE_URL; // z.B. "" (same origin) oder "http://localhost:8000"
 export function setBaseUrl(url: string) {
   BASE_URL = url.replace(/\/+$/, "");
-  console.log(BASE_URL)
 }
 
 function getCookie(name: string) {
@@ -73,10 +71,7 @@ export async function apiFetch<T = any>(
     body = opts.body; // Browser setzt Boundary / Content-Type selbst
   }
 
-  console.log(needCsrf(method))
-
   if (needCsrf(method)) {
-    console.log(getCookie("csrf_token"))
     const csrf = getCookie("csrf_token");
     if (csrf) headers["x-csrf-token"] = csrf;
   }

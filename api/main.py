@@ -126,7 +126,7 @@ def get_rate(country_code: str, rate_type: str, supply_date: date, category_hint
     if category_hint:
         # Suche nach einem reduced_rate-Eintrag mit Kategorie
         for rr in data.get("reduced_rates", []):
-            if rr["label"].endswith(f":{category_hint}"):
+            if rr["label"].lower().endswith(f":{category_hint.lower()}"):
                 found_rate = rr["rate"]
                 break
         
@@ -279,7 +279,7 @@ async def endpoint_b_app(payload: ValidateRequest, user=Depends(get_current_user
 
 @app.post("/app/rates/{country}")
 async def endpoint_c_app(country: str, user=Depends(get_current_user), _=Depends(check_and_increment_user_quota)):
-    return await handle_get_rates(country)
+    return handle_get_rates(country)
 
 @app.get("/api/health")
 def health():

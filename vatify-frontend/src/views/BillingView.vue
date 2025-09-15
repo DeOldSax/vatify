@@ -34,8 +34,6 @@ const props = withDefaults(defineProps<{
 }>(), {
 })
 
-console.log("BillingView user:", props.user);
-
 // Update the import path if the file is located elsewhere, for example:
 import { startCheckout, openPortal } from "../services/billing";
 import type { User } from "@/composables/useSession";
