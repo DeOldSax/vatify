@@ -61,11 +61,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useSession, type Usage } from '@/composables/useSession';
+import { onMounted, ref, computed } from 'vue';
+import { useSession, type Usage, type ApiKey } from '@/composables/useSession';
 import BillingView from './BillingView.vue';
 
-const { user, getUsage } = useSession();
+const { user, getUsage, listApiKeys, createApiKey } = useSession();
 
 const usage = ref<Usage | null>(null);
 const usageLoading = ref(false);

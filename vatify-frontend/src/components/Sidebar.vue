@@ -6,6 +6,7 @@ const items = [
   { name: 'Dashboard', to: '/dashboard', icon: 'M3 12l7-7 7 7M5 10v10h4v-6h6v6h4V10' },
   { name: 'API Keys', to: '/keys', icon: 'M15 7a3 3 0 1 0-2.83 2H12l-2 2H8v2H6v2h2l4-4h.17A3 3 0 0 0 15 7z' },
   { name: 'API Playground', to: '/api', icon: 'M4 6h16v4H4zm0 6h10v6H4z' },
+  { name: 'API Documentation', to: '/docs', icon: 'M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z M14 2v6h6 M8 13h8 M8 17h8' },
 ]
 const isActive = (path: string) => route.path.startsWith(path)
 </script>

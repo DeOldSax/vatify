@@ -1,7 +1,7 @@
 curl -s https://api.vatifytax.app/v1/validate-vat \
   -H "Authorization: Bearer vk_live_whI6VGS-bmhat1_-evUUnjtKvX3LxB0BOuwx63QrtPU" \
   -H "Content-Type: application/json" \
-  -d '{"vat_number":"DE811907980"}' | jq
+  -d '{"vat_number":"811907980"}' | jq
 
 curl -s https://api.vatifytax.app/v1/calculate \
   -H "Authorization: Bearer vk_live_whI6VGS-bmhat1_-evUUnjtKvX3LxB0BOuwx63QrtPU" \
