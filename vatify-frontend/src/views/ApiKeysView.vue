@@ -3,7 +3,7 @@
   
     <section class="rounded-2xl shadow-card border border-gray-200 bg-white p-6">
       <div class="mb-3 flex items-center justify-between">
-        <h3 class="text-lg font-semibold">API-Keys</h3>
+        <h3 class="text-lg font-semibold">API-Keys <span class="text-gray-500 text-sm">(only just created keys are visible!)</span></h3>
         <div class="flex items-center gap-2">
           <input
             v-model="newLabel"
@@ -29,7 +29,7 @@
               {{ k.name || 'Ohne Label' }}
             </div>
             <div class="text-gray-500">
-              {{ k.secret ? k.secret : "sk_live_" + '••••••••' + k.last4 }}
+              {{ k.secret ? k.secret : "vk_live_" + '••••••••' + k.last4 }}
             </div>
           </div>
           <div class="text-xs text-gray-500">
@@ -72,7 +72,7 @@ async function loadKeys() {
 async function createKey() {
   keysLoading.value = true;
   try {
-    const created = await createApiKey(newLabel.value ? { name: newLabel.value } : {});
+    const created = await createApiKey(newLabel.value ? { name: newLabel.value } : { name: 'Vatify Api Key ' + Date.now()});
     keys.value.data.push(created.data)
     keys.value.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     // In vielen APIs wird der Key nur einmal komplett zurückgegeben – hier zeigen wir ggf. key_preview

@@ -20,7 +20,7 @@ watch(() => route.fullPath, () => { isOpen.value = false })
 </script>
 
 <template>
-  <div class="min-h-screen bg-white text-gray-900">
+  <div v-if="session.initialized" class="min-h-screen bg-white text-gray-900">
     <!-- Mobile overlay -->
     <transition name="fade">
       <div

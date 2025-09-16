@@ -116,6 +116,7 @@ export function useSession() {
     user: state.user,
     loading: computed(() => state.loading),
     error: computed(() => state.error),
+    initialized: computed(() => state.initialized),
     isAuthenticated,
 
     // actions
