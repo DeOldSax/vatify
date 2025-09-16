@@ -46,7 +46,7 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
             agg = await db.get(MonthlyQuota, {"month": month, "api_key_id": rec.id})
             used = agg.requests if agg else 0
 
-            user = get_current_user(request, db)
+            user = await get_current_user(request, db)
             if user.subscription_status == "active":
                 limit = 1000  # für Pro-User
             else:
