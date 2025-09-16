@@ -34,9 +34,9 @@ Content-Type: application/json"></Snippet>
 
         <div>
           <div class="font-medium text-slate-700">Request Body</div>
-           <Snippet code="{'vat_number': 'DE811907980'}"></Snippet>
+           <Snippet code="{'vat_number': 'IT00743110157'}"></Snippet>
           <p class="mt-2 text-xs text-slate-500">
-            <span class="font-medium">vat_number</span> — string, may include country prefix (ISO-2) like <code>DE</code>, <code>FR</code>, <code>IT</code>.
+            <span class="font-medium">vat_number</span> — string, includes country prefix (ISO-2) like <code>DE</code>, <code>FR</code>, <code>IT</code>.
           </p>
         </div>
         
@@ -49,43 +49,41 @@ Content-Type: application/json"></Snippet>
           <details class="mt-2">
             <summary class="cursor-pointer text-slate-700 font-medium">Field reference (possible values)</summary>
             <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
-              <div><span class="font-medium">valid</span>: boolean — VAT is syntactically and registry-valid.</div>
-              <div><span class="font-medium">normalized_vat</span>: string — Canonical representation with country prefix.</div>
+              <div><span class="font-medium">valid</span>: boolean — VAT is syntactically and registry-valid. Checked by VIES.</div>
               <div><span class="font-medium">country_code</span>: ISO-3166-1 alpha-2 (e.g., DE, FR, IT, ES, NL, BE, AT, PL, SE, DK, IE, PT, FI, CZ, SK, HU, RO, BG, SI, HR, LT, LV, EE, LU, CY, MT, GR).</div>
-              <div><span class="font-medium">taxpayer_name</span>: string | null (optional when registry doesn’t return the name).</div>
+              <div><span class="font-medium">vat_number</span>: string — Canonical representation without country prefix.</div>
+              <div><span class="font-medium">vies_request_date_raw</span>: optional, Date set by VIES.</div>
+              <div><span class="font-medium">checked_at</span>: RFC3339 datetime (UTC).</div>
+              <div><span class="font-medium">name</span>: string | null (optional when VIES doesn’t return the name).</div>
               <div><span class="font-medium">address</span>: string | null (optional / may be empty).</div>
-              <div><span class="font-medium">request_date</span>: RFC3339 datetime (UTC).</div>
-              <div><span class="font-medium">source</span>: string — typical values: <code>VIES</code>, <code>national</code>, <code>cache</code>.</div>
-              <div><span class="font-medium">company_type</span>: string | null — e.g., <code>GmbH</code>, <code>AG</code>, <code>SARL</code>, <code>SpA</code> (country-specific; optional).</div>
-              <div><span class="font-medium">status</span>: string — common values: <code>active</code>, <code>invalid</code>, <code>not_found</code>, <code>temporarily_unavailable</code>.</div>
-              <div><span class="font-medium">registration_date</span>: YYYY-MM-DD | null (optional).</div>
-              <div><span class="font-medium">meta.request_id</span>: string — helpful for support.</div>
-              <div><span class="font-medium">meta.latency_ms</span>: number — server processing time.</div>
             </div>
           </details>
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Errors</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>// 400 Bad Request
-{ "error": "invalid_vat_number", "message": "VAT number format is invalid." }
+          <Snippet code='// 400 Bad Request
+{ "detail": Detailed Description }
 
 // 401 Unauthorized
-{ "error": "unauthorized", "message": "Missing or invalid API key." }
+{ "error": Error Message }
 
 // 429 Too Many Requests
-{ "error": "rate_limited", "message": "Quota exceeded. Try later." }
+{ "error": "Free Monthly quota exceeded" }
+
+// 500 Unexpected Error from VIES
+{ "error": "Unexpected Error while checking with VIES." }
+
+// 502 VIES FAULT
+{ "error": "VIES Fault: Error Message" }
 
 // 503 Service Unavailable
-{ "error": "upstream_unavailable", "message": "VIES temporarily unavailable." }</code></pre>
+{ "error": "VIES temporarily unavailable." }'></Snippet>
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Example cURL</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>curl -s {{ baseUrl }}/v1/validate-vat \
-  -H "Authorization: Bearer {{ exampleKey }}" \
-  -H "Content-Type: application/json" \
-  -d '{"vat_number":"DE811907980"}'</code></pre>
+          <Snippet :code=validate_vat_example_curl></Snippet>
         </div>
       </div>
     </section>
@@ -285,19 +283,17 @@ const validate_vat_endpoint = `${baseUrl}/v1/validate-vat`
 
 const validate_vat_response = `{
   "valid": true,
-  "normalized_vat": "DE811907980",
-  "country_code": "DE",
-  "taxpayer_name": "Siemens AG",
-  "address": "Werner-von-Siemens-Str. 1, 80333 München, DE",
-  "request_date": "2025-09-16T15:20:45Z",
-  "source": "VIES",
-  "company_type": "AG",
-  "status": "active",
-  "registration_date": "1995-01-01",
-  "meta": {
-    "request_id": "req_01J...XYZ",
-    "latency_ms": 210
-  }
+  "country_code": "IT",
+  "vat_number": "00743110157",
+  "vies_request_date_raw": "2025-09-16+02:00",
+  "checked_at": "2025-09-16T17:06:38.508986Z",
+  "name": "MOTOROLA SOLUTIONS ITALIA SRL",
+  "address": "LARGO FRANCESCO RICHINI 6 20122 MILANO MI"
 }`
+
+const validate_vat_example_curl = `curl -s ${validate_vat_endpoint}
+  -H "Authorization: Bearer ${exampleKey}"
+  -H "Content-Type: application/json"
+  -d '{"vat_number":"DE811907980"}'`
 
 </script>

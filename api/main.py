@@ -168,13 +168,13 @@ async def handle_validate_vat(payload: ValidateRequest) -> ValidateResponse:
         result = await run_in_threadpool(call_vies_check_vat_raw, cc, num)
         print(result)
     except Fault as e:
-        raise HTTPException(status_code=502, detail=f"VIES Fault: {getattr(e, 'message', str(e))}")
+        raise HTTPException(status_code=502, error=f"VIES Fault: {getattr(e, 'message', str(e))}")
     except TransportError:
-        raise HTTPException(status_code=503, detail="VIES-Dienst derzeit nicht erreichbar. Bitte später erneut versuchen.")
+        raise HTTPException(status_code=503, error="VIES temporarily unavailable.")
     except Exception:
         import traceback
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Unerwarteter Fehler beim VIES-Check.")
+        raise HTTPException(status_code=500, error="Unexpected Error while checking with VIES.")
 
     return ValidateResponse(
         valid=bool(result["valid"]),
