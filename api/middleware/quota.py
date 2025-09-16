@@ -9,7 +9,7 @@ import asyncio
 
 from deps import get_current_user
 from db.session import AsyncSessionLocal
-from db.models import ApiKey, MonthlyQuota, UsageCounter
+from db.models import ApiKey, MonthlyQuota, UsageCounter, User
 from core.config import settings
 from core.security import API_KEY_PREFIX, hash_api_key
 
@@ -18,7 +18,7 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self.protected_prefixes = protected_prefixes
 
-    async def dispatch(self, request: Request, call_next, user=Depends(get_current_user)):
+    async def dispatch(self, request: Request, call_next, user: User = Depends(get_current_user)):
         path = request.url.path
         if not any(path.startswith(p) for p in self.protected_prefixes):
             return await call_next(request)
