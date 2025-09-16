@@ -6,7 +6,7 @@
     </pre>
 
     <button
-      class="absolute top-2 right-2 px-2 py-1 rounded-md border border-slate-600 bg-slate-800/70 text-slate-100 text-[11px] hover:bg-slate-700 active:scale-95 transition"
+      class="absolute top-2 right-2 px-2 py-1 rounded-md text-slate-100 text-[11px] hover:bg-slate-700 active:scale-95 transition"
       @click="copy"
       :aria-label="copied ? 'Copied!' : 'Copy'"
     >
