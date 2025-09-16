@@ -46,8 +46,11 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
             month = date.today().replace(day=1)
             agg = await db.get(MonthlyQuota, {"month": month, "api_key_id": rec.id})
             used = agg.requests if agg else 0
+
+            user = await db.get(User, rec.user_id)
+            if not user:
+                return JSONResponse({"error": "User not found for API key"}, status_code=401)
             
-            user = await get_current_user(request=request, db=db)
             if user.subscription_status == "active":
                 limit = 1000  # für Pro-User
             else:
