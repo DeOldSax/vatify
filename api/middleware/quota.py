@@ -18,7 +18,7 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self.protected_prefixes = protected_prefixes
 
-    async def dispatch(self, request: Request, call_next, user: User = Depends(get_current_user)):
+    async def dispatch(self, request: Request, call_next):
         path = request.url.path
         if not any(path.startswith(p) for p in self.protected_prefixes):
             return await call_next(request)
@@ -46,7 +46,8 @@ class APIKeyAuthQuotaMiddleware(BaseHTTPMiddleware):
             month = date.today().replace(day=1)
             agg = await db.get(MonthlyQuota, {"month": month, "api_key_id": rec.id})
             used = agg.requests if agg else 0
-
+            
+            user = await get_current_user(request=request, db=db)
             if user.subscription_status == "active":
                 limit = 1000  # für Pro-User
             else:
