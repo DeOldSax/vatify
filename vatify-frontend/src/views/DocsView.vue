@@ -36,7 +36,8 @@ Content-Type: application/json"></Snippet>
           <div class="font-medium text-slate-700">Request Body</div>
            <Snippet code="{'vat_number': 'IT00743110157'}"></Snippet>
           <p class="mt-2 text-xs text-slate-500">
-            <span class="font-medium">vat_number</span> — string, includes country prefix (ISO-2) like <code>DE</code>, <code>FR</code>, <code>IT</code>.
+            <span class="font-medium">vat_number</span> — string, includes country prefix (ISO-2) like   <code>AT</code>, <code>BE</code>, <code>BG</code>, <code>CY</code>, <code>CZ</code>, <code>DE</code>, <code>DK</code>, <code>EE</code>, <code>EL</code>, <code>ES</code>, <code>FI</code>, <code>FR</code>, <code>HR</code>, <code>HU</code>,
+        <code>IE</code>, <code>IT</code>, <code>LT</code>, <code>LU</code>, <code>LV</code>, <code>MT</code>, <code>NL</code>, <code>PL</code>, <code>PT</code>, <code>RO</code>, <code>SE</code>, <code>SI</code>, <code>SK</code>, <code>XI</code> like <code>DE</code>, <code>FR</code>, <code>IT</code>.
           </p>
         </div>
         
@@ -50,7 +51,9 @@ Content-Type: application/json"></Snippet>
             <summary class="cursor-pointer text-slate-700 font-medium">Field reference (possible values)</summary>
             <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
               <div><span class="font-medium">valid</span>: boolean — VAT is syntactically and registry-valid. Checked by VIES.</div>
-              <div><span class="font-medium">country_code</span>: ISO-3166-1 alpha-2 (e.g., DE, FR, IT, ES, NL, BE, AT, PL, SE, DK, IE, PT, FI, CZ, SK, HU, RO, BG, SI, HR, LT, LV, EE, LU, CY, MT, GR).</div>
+              <div><span class="font-medium">country_code</span>: ISO-3166-1 alpha-2 (e.g.,   <code>AT</code>, <code>BE</code>, <code>BG</code>, <code>CY</code>, <code>CZ</code>, <code>DE</code>, <code>DK</code>, <code>EE</code>, <code>EL</code>, <code>ES</code>, <code>FI</code>, <code>FR</code>, <code>HR</code>, <code>HU</code>,
+        <code>IE</code>, <code>IT</code>, <code>LT</code>, <code>LU</code>, <code>LV</code>, <code>MT</code>, <code>NL</code>, <code>PL</code>, <code>PT</code>, <code>RO</code>, <code>SE</code>, <code>SI</code>, <code>SK</code>, <code>XI</code> like <code>DE</code>, <code>FR</code>, <code>IT</code>.
+              )</div>
               <div><span class="font-medium">vat_number</span>: string — Canonical representation without country prefix.</div>
               <div><span class="font-medium">vies_request_date_raw</span>: optional, Date set by VIES.</div>
               <div><span class="font-medium">checked_at</span>: RFC3339 datetime (UTC).</div>
@@ -63,7 +66,7 @@ Content-Type: application/json"></Snippet>
         <div>
           <div class="font-medium text-slate-700">Errors</div>
           <Snippet code='// 400 Bad Request
-{ "detail": Detailed Description }
+{ "error": Detailed Description }
 
 // 401 Unauthorized
 { "error": Error Message }
@@ -97,101 +100,99 @@ Content-Type: application/json"></Snippet>
       <div class="text-sm text-slate-600 space-y-4">
         <div>
           <div class="font-medium text-slate-700">Endpoint</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>POST {{ baseUrl }}/v1/calculate</code></pre>
+          <Snippet :code="calculate_endpoint"></Snippet>
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Headers</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>Authorization: Bearer &lt;API_KEY&gt;
-Content-Type: application/json</code></pre>
+          <Snippet :code="calculate_headers"></Snippet>
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Request Body</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>{
-  "country_code": "DE",
-  "rate_type": "standard",
-  "supply_date": "2025-09-16",
-  "amount_type": "net",
-  "amount": 100.00,
-  "currency": "EUR",
-  "b2b": true,
-  "reverse_charge": false,
-  "origin_country": "DE",
-  "service_type": "digital_services"
-}</code></pre>
+          <Snippet :code="calculate_request_example"></Snippet>
+          
           <details class="mt-2">
-            <summary class="cursor-pointer text-slate-700 font-medium">Field reference & enums</summary>
-            <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
-              <div><span class="font-medium">country_code</span>: ISO-2; destination country for VAT.</div>
-              <div><span class="font-medium">rate_type</span>: one of <code>standard</code>, <code>reduced</code>, <code>super_reduced</code>, <code>zero</code>, <code>parking</code> (availability varies per country).</div>
-              <div><span class="font-medium">supply_date</span>: YYYY-MM-DD — used for historic rate changes.</div>
-              <div><span class="font-medium">amount_type</span>: <code>net</code> | <code>gross</code>.</div>
-              <div><span class="font-medium">amount</span>: number — base amount in <span class="font-medium">currency</span>.</div>
-              <div><span class="font-medium">currency</span>: ISO-4217 (default <code>EUR</code>).</div>
-              <div><span class="font-medium">b2b</span>: boolean — affects rules (e.g., place of supply).</div>
-              <div><span class="font-medium">reverse_charge</span>: boolean — if true, VAT due by customer (result VAT 0 and rule explanation).</div>
-              <div><span class="font-medium">origin_country</span>: ISO-2 (optional; for intra-EU goods rules).</div>
-              <div><span class="font-medium">service_type</span>: string — e.g., <code>digital_services</code>, <code>telecom</code>, <code>saas</code>, <code>goods</code> (optional, clarifies rule set).</div>
-            </div>
-          </details>
+  <summary class="cursor-pointer text-slate-700 font-medium">Field reference & enums</summary>
+  <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
+    <div><span class="font-medium">amount</span>: number — base amount in request currency.</div>
+    <div><span class="font-medium">basis</span>: <code>net</code> | <code>gross</code> — whether <code>amount</code> is before or after VAT.</div>
+    <div>
+      <span class="font-medium">rate_type</span>: one of 
+      <code>standard</code>, <code>reduced</code>, <code>super_reduced</code>, <code>zero</code>, <code>parking</code> 
+      (availability varies by country).
+    </div>
+    <div><span class="font-medium">supply_date</span>: YYYY-MM-DD — used to apply historic or future rate changes.</div>
+
+    <div>
+      <span class="font-medium">supplier</span>: object with supplier details:
+      <ul class="list-disc ml-5">
+        <li><span class="font-medium">country_code</span>: ISO-2 country code.</li>
+        <li><span class="font-medium">vat_number</span>: optional VAT ID string.</li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="font-medium">customer</span>: object with customer details:
+      <ul class="list-disc ml-5">
+        <li><span class="font-medium">country_code</span>: ISO-2 country code.</li>
+        <li><span class="font-medium">vat_number</span>: optional VAT ID string.</li>
+      </ul>
+    </div>
+
+    <div><span class="font-medium">supply_type</span>: string — e.g. <code>goods</code>, <code>services</code>, <code>digital</code> (determines rule set).</div>
+    <div><span class="font-medium">b2x</span>: <code>B2B</code> | <code>B2C</code> — defines business/customer relation.</div>
+    <div><span class="font-medium">category_hint</span>: optional string to refine rate selection (e.g. <code>ACCOMMODATION</code>, <code>CULTURAL_EVENTS</code>).</div>
+  </div>
+</details>
+
         </div>
 
         <div>
-          <div class="font-medium text-slate-700">Response (200)</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>{
-  "country_code": "DE",
-  "rate": 19.0,
-  "rate_type": "standard",
-  "rate_label": "Standard rate",
-  "taxable_amount": 100.00,
-  "vat_amount": 19.00,
-  "total_amount": 119.00,
-  "currency": "EUR",
-  "rule_applied": "standard_domestic",
-  "reverse_charge": false,
-  "notes": "Standard domestic VAT applied for B2B supply.",
-  "effective_from": "2007-01-01",
-  "effective_to": null,
-  "meta": { "request_id": "req_01J...ABC" }
-}</code></pre>
+  <div class="font-medium text-slate-700">Response (200)</div>
+  <Snippet :code="calculate_response_example"></Snippet>
 
-          <details class="mt-2">
-            <summary class="cursor-pointer text-slate-700 font-medium">Field reference</summary>
-            <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
-              <div><span class="font-medium">rate</span>: number (percent).</div>
-              <div><span class="font-medium">rate_type</span> / <span class="font-medium">rate_label</span>: selected rate.</div>
-              <div><span class="font-medium">taxable_amount</span>, <span class="font-medium">vat_amount</span>, <span class="font-medium">total_amount</span>: numbers in response <span class="font-medium">currency</span>.</div>
-              <div><span class="font-medium">rule_applied</span>: string — e.g., <code>reverse_charge</code>, <code>standard_domestic</code>, <code>intra_eu_b2b</code>, <code>distance_sale</code>, <code>digital_moss</code> (adjust to your rules).</div>
-              <div><span class="font-medium">effective_from</span>/<span class="font-medium">effective_to</span>: rate validity window.</div>
-            </div>
-          </details>
-        </div>
+  <details class="mt-2">
+    <summary class="cursor-pointer text-slate-700 font-medium">Field reference</summary>
+    <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
+      <div><span class="font-medium">country_code</span>: ISO 2-letter country code used for the calculation (e.g. <code>FR</code>).</div>
+      <div><span class="font-medium">applied_rate</span>: number (percent) actually applied to the calculation (e.g. <code>10.0</code>).</div>
+
+      <div><span class="font-medium">net</span>: number — taxable amount before VAT.</div>
+      <div><span class="font-medium">vat</span>: number — VAT amount charged.</div>
+      <div><span class="font-medium">gross</span>: number — total amount (net + vat).</div>
+
+      <div>
+        <span class="font-medium">mechanism</span>: string indicating the tax mechanism applied.<br>
+        Possible values include e.g. <code>normal</code>, <code>reverse_charge</code>, <code>intra_eu_b2b</code>, <code>exempt</code> (varies by rule set).
+      </div>
+
+      <div>
+        <span class="font-medium">messages[]</span>: array of human-readable notes explaining decisions or checks performed
+        (e.g. validation results, why reverse charge was/wasn’t applied).
+      </div>
+
+      <div>
+        <span class="font-medium">vat_check_status</span>: string summarizing VAT ID verification result, if performed.<br>
+        Examples: <code>validated</code>, <code>invalid</code>, <code>unknown</code>, <code>not_provided</code>.
+      </div>
+    </div>
+  </details>
+</div>
+
 
         <div>
           <div class="font-medium text-slate-700">Errors</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>// 400 Bad Request
-{ "error": "unsupported_rate_type", "message": "Rate type not available in country." }
+          <Snippet code='// 400 Bad Request
+{ "error": "Error Message" }
 
 // 422 Unprocessable Entity
-{ "error": "validation_error", "message": "amount must be > 0" }</code></pre>
+{ "error": "Error Message" }'></Snippet>
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Example cURL</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>curl -s {{ baseUrl }}/v1/calculate \
-  -H "Authorization: Bearer {{ exampleKey }}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "country_code":"DE",
-    "rate_type":"standard",
-    "supply_date":"2025-09-16",
-    "amount_type":"net",
-    "amount":100.0,
-    "currency":"EUR",
-    "b2b":true,
-    "reverse_charge":false
-  }'</code></pre>
+          <Snippet :code="calculate_curl_example"></Snippet>
         </div>
       </div>
     </section>
@@ -205,48 +206,61 @@ Content-Type: application/json</code></pre>
       <div class="text-sm text-slate-600 space-y-4">
         <div>
           <div class="font-medium text-slate-700">Endpoint</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>GET {{ baseUrl }}/v1/rates/{country_code}</code></pre>
-          <p class="mt-2 text-xs text-slate-500">Path param <code>country_code</code> is ISO-2 (e.g., <code>DE</code>).</p>
+          <Snippet :code="`${baseUrl}/v1/rates/{country_code}`"></Snippet>
+          <p class="mt-2 text-xs text-slate-500">Path param <code>country_code</code> is ISO-2 (e.g.,  <code>AT</code>, <code>BE</code>, <code>BG</code>, <code>CY</code>, <code>CZ</code>, <code>DE</code>, <code>DK</code>, <code>EE</code>, <code>EL</code>, <code>ES</code>, <code>FI</code>, <code>FR</code>, <code>HR</code>, <code>HU</code>,
+        <code>IE</code>, <code>IT</code>, <code>LT</code>, <code>LU</code>, <code>LV</code>, <code>MT</code>, <code>NL</code>, <code>PL</code>, <code>PT</code>, <code>RO</code>, <code>SE</code>, <code>SI</code>, <code>SK</code>, <code>XI</code> like <code>DE</code>, <code>FR</code>, <code>IT</code>.
+          )</p>
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Headers</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>Authorization: Bearer &lt;API_KEY&gt;</code></pre>
+          <Snippet code="Authorization: Bearer <API_KEY>" />
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Response (200)</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>{
-  "country_code": "DE",
-  "currency": "EUR",
-  "rates": [
-    { "type": "standard", "rate": 19.0, "label": "Standard", "effective_from": "2007-01-01", "effective_to": null },
-    { "type": "reduced", "rate": 7.0, "label": "Reduced", "effective_from": "2007-01-01", "effective_to": null },
-    { "type": "zero", "rate": 0.0, "label": "Zero", "effective_from": null, "effective_to": null }
-  ],
-  "meta": { "request_id": "req_01J...RATES" }
-}</code></pre>
 
-          <details class="mt-2">
-            <summary class="cursor-pointer text-slate-700 font-medium">Field reference & enums</summary>
-            <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
-              <div><span class="font-medium">rates[].type</span>: <code>standard</code> | <code>reduced</code> | <code>super_reduced</code> | <code>zero</code> | <code>parking</code> (subset depends on country).</div>
-              <div><span class="font-medium">rates[].rate</span>: number (percent).</div>
-              <div><span class="font-medium">effective_from</span>/<span class="font-medium">effective_to</span>: date strings or null.</div>
-            </div>
-          </details>
+          <Snippet :code="rates_api_response"></Snippet>
+
+         <details class="mt-2">
+  <summary class="cursor-pointer text-slate-700 font-medium">Field reference & enums</summary>
+  <div class="mt-2 text-xs leading-6 text-slate-600 space-y-1">
+    <div><span class="font-medium">country</span>: ISO 2-letter code (e.g.  <code>AT</code>, <code>BE</code>, <code>BG</code>, <code>CY</code>, <code>CZ</code>, <code>DE</code>, <code>DK</code>, <code>EE</code>, <code>EL</code>, <code>ES</code>, <code>FI</code>, <code>FR</code>, <code>HR</code>, <code>HU</code>,
+        <code>IE</code>, <code>IT</code>, <code>LT</code>, <code>LU</code>, <code>LV</code>, <code>MT</code>, <code>NL</code>, <code>PL</code>, <code>PT</code>, <code>RO</code>, <code>SE</code>, <code>SI</code>, <code>SK</code>, <code>XI</code> like <code>DE</code>, <code>FR</code>, <code>IT</code>).</div>
+    <div><span class="font-medium">standard_rate</span>: number (percent).</div>
+    <div>
+      <span class="font-medium">reduced_rates[]</span>: list of objects:
+      <ul class="list-disc ml-5">
+        <li><span class="font-medium">rate</span>: number (percent).</li>
+        <li>
+          <span class="font-medium">label</span>: string.<br>
+          Possible values:
+          <code>reduced_rate:ACCOMMODATION</code>,
+          <code>reduced_rate:CULTURAL_EVENTS</code>,
+          <code>reduced_rate:ZOOLOGICAL</code>, … (varies by country).
+        </li>
+      </ul>
+    </div>
+    <div><span class="font-medium">currency</span>: ISO currency code (e.g. <code>EUR</code>).</div>
+    <div><span class="font-medium">valid_on</span>: date string (rates valid on this date).</div>
+    <div><span class="font-medium">source</span>: string (e.g. <code>EU/VATify</code>).</div>
+  </div>
+</details>
+
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Errors</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>// 404 Not Found
-{ "error": "country_not_supported", "message": "No rates for country_code=XX" }</code></pre>
+          <Snippet code='// 400 Bad Request
+{  "error": "Error Message" }
+
+// 404 Not Found
+{  "error": "Error Message" }' />
         </div>
 
         <div>
           <div class="font-medium text-slate-700">Example cURL</div>
-          <pre class="mt-1 bg-slate-50 border rounded p-3 overflow-x-auto"><code>curl -s {{ baseUrl }}/v1/rates/DE \
-  -H "Authorization: Bearer {{ exampleKey }}"</code></pre>
+          <Snippet :code="rates_curl_example" />
         </div>
       </div>
     </section>
@@ -256,9 +270,8 @@ Content-Type: application/json</code></pre>
       <h4 class="text-base font-semibold text-slate-800">General</h4>
       <ul class="mt-2 list-disc pl-5 text-sm text-slate-600 space-y-1">
         <li>All responses are JSON. Datetimes are RFC3339 (UTC).</li>
-        <li>Idempotency: reads are idempotent; calculations are deterministic for given inputs.</li>
         <li>Rate limits: per-plan quotas; 429 returned when exceeded.</li>
-        <li>Error schema: <code>{ "error": string, "message": string, "details"?: object }</code>.</li>
+        <li>Error schema: <code>{ "error": string }</code>.</li>
       </ul>
     </section>
   </div>
@@ -275,7 +288,7 @@ const { user } = useSession()
 
 // Show a masked example key if user is logged in (purely cosmetic for docs)
 const exampleKey = computed(() => {
-  const raw = (user?.value as any)?.apiKey || 'sk_live_xxx'
+  const raw = (user?.value as any)?.apiKey || 'vk_live_xxx'
   return raw.length > 10 ? raw.slice(0, 6) + '…' + raw.slice(-4) : raw
 })
 
@@ -292,8 +305,81 @@ const validate_vat_response = `{
 }`
 
 const validate_vat_example_curl = `curl -s ${validate_vat_endpoint}
-  -H "Authorization: Bearer ${exampleKey}"
+  -H "Authorization: Bearer ${exampleKey.value}"
   -H "Content-Type: application/json"
   -d '{"vat_number":"DE811907980"}'`
 
+
+const rates_api_response = `{
+  "country": "DE",
+  "standard_rate": 19.0,
+  "reduced_rates": [
+   ...
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:ACCOMMODATION"
+    },
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:CULTURAL_EVENTS"
+    },
+   ...
+    {
+      "rate": 7.0,
+      "label": "reduced_rate:ZOOLOGICAL"
+    }
+  ],
+  "currency": "EUR",
+  "valid_on": "2025-07-01",
+  "source": "EU/VATify"
+}`
+
+const rates_curl_example = `curl -s ${baseUrl}/v1/rates/DE
+  -H "Authorization: Bearer ${exampleKey.value}"`
+
+
+const calculate_endpoint = `POST ${baseUrl}/v1/calculate`
+const calculate_headers = `Authorization: Bearer ${exampleKey.value}
+Content-Type: application/json`
+
+const calculate_request_example = `{
+    "amount": 100.0,
+    "basis": "net",
+    "rate_type": "reduced",
+    "supply_date": "2025-09-12",
+    "supplier": { "country_code": "DE", "vat_number": "DE123456789" },
+    "customer": { "country_code": "FR", "vat_number": "FR12345678901" },
+    "supply_type": "services",
+    "b2x": "B2B",
+    "category_hint": "ACCOMMODATION"
+  }`
+
+const calculate_response_example = `{
+  "country_code": "FR",
+  "applied_rate": 10.0,
+  "net": 100.0,
+  "vat": 1000.0,
+  "gross": 1100.0,
+  "mechanism": "normal",
+  "messages": [
+    "Customer VAT number invalid or unavailable → Reverse Charge not applied.",
+    "No Reverse Charge applied; VAT charged normally."
+  ],
+  "vat_check_status": "validated"
+}`
+
+const calculate_curl_example = `curl -s ${baseUrl}/v1/calculate
+  -H "Authorization: Bearer ${exampleKey.value}"
+  -H "Content-Type: application/json"
+  -d '{
+    "amount": 100.0,
+    "basis": "net",
+    "rate_type": "reduced",
+    "supply_date": "2025-09-12",
+    "supplier": { "country_code": "DE", "vat_number": "DE123456789" },
+    "customer": { "country_code": "FR", "vat_number": "FR12345678901" },
+    "supply_type": "services",
+    "b2x": "B2B",
+    "category_hint": "ACCOMMODATION"
+  }`
 </script>

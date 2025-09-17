@@ -4,7 +4,9 @@
     <section class="rounded-2xl shadow-card border border-gray-200 bg-white p-6">
       <div class="mb-2 flex items-center justify-between">
         <h3 class="text-lg font-semibold text-slate-800">Account</h3>
+        <!--
         <span v-if="user" class="text-xs text-slate-500">ID: {{ user.id }}</span>
+        -->
       </div>
       <div v-if="user" class="text-sm text-slate-500">
         <div><span class="font-medium">E-Mail:</span> {{ user.email }}</div>

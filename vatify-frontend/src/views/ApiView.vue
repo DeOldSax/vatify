@@ -1,6 +1,7 @@
 <!-- src/components/VatifyMiniForms.vue -->
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import Snippet from '@/components/Snippet.vue'
 const countries = [
         "AT","BE","BG","CY","CZ","DE","DK","EE","EL","ES","FI","FR","HR","HU",
         "IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK","XI"
@@ -131,15 +132,8 @@ async function onLoadCountryRates() {
     </div>
 
     <!-- Code Snippet -->
-    <div class="bg-slate-900 text-slate-100 rounded-xl p-4 font-mono text-sm relative">
-      <pre><code>{{ curlSnippet }}</code></pre>
-      <button
-        @click="copy"
-        class="absolute top-2 right-2 text-slate-400 hover:text-slate-100"
-      >
-        Copy
-      </button>
-    </div>
+    <Snippet :id="`curl-${active}`"  :code="curlSnippet" />
+  
     <!-- Validate VAT – neues Design -->
     <section v-if="active =='validate'" class="rounded-2xl mt-4 bg-white space-y-3">
       <label class="text-sm font-medium text-slate-700">VAT Number</label>

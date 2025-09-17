@@ -45,23 +45,23 @@ def _pick_effective_date(rates_by_date: Dict[date, Dict], wanted: date) -> Optio
 
 @router.get("/{country}", response_model=CountryRates)
 def get_rates(
-    country: str = Path(..., description="ISO-3166-1 Alpha-2, z. B. DE"),
+    country: str = Path(..., description="ISO-3166-1 Alpha-2, e.. g. DE"),
     date_param: Optional[date] = Query(None, alias="date", description="YYYY-MM-DD; Standard: heute"),
 ):
     key = country.upper()
     if len(key) != 2 or not key.isalpha():
-        raise HTTPException(status_code=400, detail="country muss ein 2-stelliger ISO-Alpha-2-Code sein (z. B. DE).")
+        raise HTTPException(status_code=400, error="country must be a 2-character ISO Alpha-2 code (e.g. DE).")
 
     today = date.today()
     wanted = date_param or today
 
     country_data = _VAT_RATES.get(key)
     if not country_data:
-        raise HTTPException(status_code=404, detail=f"Unbekanntes Land: {key}")
+        raise HTTPException(status_code=404, error=f"Unknown Country Key: {key}")
 
     eff = _pick_effective_date(country_data, wanted)
     if eff is None:
-        raise HTTPException(status_code=404, detail=f"Keine Raten für {key} zum Datum {wanted.isoformat()} gefunden.")
+        raise HTTPException(status_code=404, error=f"No rates found for {key} on {wanted.isoformat()}.")
 
     payload = country_data[eff]
     return CountryRates(

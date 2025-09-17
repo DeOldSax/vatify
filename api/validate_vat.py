@@ -103,21 +103,21 @@ def normalize_inputs(vat_number: Optional[str], country_code: Optional[str], num
     if vat_number:
         raw = _clean_non_alnum.sub("", vat_number).upper()
         if len(raw) < 3:
-            raise HTTPException(status_code=400, detail="USt-ID zu kurz.")
+            raise HTTPException(status_code=400, error="VAT Number too short.")
         cc = raw[:2]
         num = raw[2:]
     else:
         if not (country_code and number):
             raise HTTPException(
                 status_code=400,
-                detail="Entweder 'vat_number' ODER ('country_code' UND 'number') angeben."
+                error="Either 'vat_number' OR ('country_code' AND 'number') must be provided."
             )
         cc = _clean_non_alnum.sub("", country_code).upper()
         num = _clean_non_alnum.sub("", number)
 
     if cc not in EU_COUNTRY_CODES:
-        raise HTTPException(status_code=400, detail=f"Ungültiger EU-Ländercode: {cc}")
+        raise HTTPException(status_code=400, error=f"Invalid EU country code: {cc}")
 
     if not num or not num.isalnum():
-        raise HTTPException(status_code=400, detail="USt-Nummer fehlt oder hat ungültige Zeichen.")
+        raise HTTPException(status_code=400, error="VAT Number is missing or contains invalid characters.")
     return cc, num
