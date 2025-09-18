@@ -13,6 +13,7 @@ export default defineConfig({
         imprint: resolve(__dirname, 'imprint.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         alternatives: resolve(__dirname, 'alternatives.html'),
+        comparison: resolve(__dirname, 'comparison.html'),
       },
     },
   },
